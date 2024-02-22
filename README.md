@@ -2,21 +2,51 @@
 # include "stdlib.h"
 #include "string.h"
 #include "math.h"
-int x = 300, y = 300, r = 20,m,c,index=0,x_axis=600,y_axis=400,x_diff=20,y_diff=20,mx_i,my_i,mx_now,my_now,x_axis_move,y_axis_move;
+int x = 300, y = 300, r = 0,m,c,index=0,x_axis=600,y_axis=400,x_diff=20,y_diff=20,mx_i,my_i,mx_now,my_now,x_axis_move,y_axis_move;
 int index_2=0,window=0;
-bool type=false,draw1=false;
+bool type=false,draw[10]={false,false,false,false,false,false,false,false,false,false};
 // bool variable_8=false,variable_9=false,variable_10=false,variable_11=false,variable_12=false,variable_13=false,variable_14=false;
 // bool variable_1=false,variable_2=false,variable_3=false,variable_4=false,variable_5=false,variable_6=false,variable_7=falsevariable_15=false,variable_16=false,variable_17=false,variable_18=false,variable_19=false,variable_20=false,variable_21=false,variable_22=false;
-bool variable[50];
+bool variable[10][50];
 bool go_back=false;
-int function=0,format=0;
+int function[10]={0,0,0,0,0,0,0,0,0,0},format[10]={0,0,0,0,0,0,0,0,0,0},function2=0;
 // char v1[10],v2[10],v3[10],v4[10],v5[10],v6[10],v7[10],v8[10],v9[10],v10[10],v11[10],v12[10],v13[10],v14[10],v15[10],v16[10],v17[10],v18[10],v19[10],v20[10],v21[10],v22[10];
-char v[50][10];
+char v[10][50][10];
 //float var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11,var12,var13,var14,var15,var16,var17,var18,var19,var20,var21,var22;
+//int i1,i2;
+float var[10][50];
 
-float var[50];
+// for(int i1=0;i1<10;i1++)
+// {
+// 	for(int i2=0;i2<50;i2++)
+// 	{
+// 		var[i1][i2]=0;
+// 	}
+// }
+void clear_variables()
+{
+	for(int i1=0;i1<10;i1++)
+	{
+	for(int i2=0;i2<50;i2++)
+		{
+			v[i1][i2][0]='\0';
+		}
+	}
+}
+
+
+
+
+
+
 int origin_x=x_axis,origin_y=y_axis;
 const double PI=M_PI,e=exp(1.0);
+
+
+
+
+
+
 
 /*
 	function iDraw() is called again and again by the system.
@@ -129,7 +159,7 @@ void draw_log_menu()
 
 void take_inputs()
 {
-    if(format==1)
+    if(format[r]==1)
     {
         iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -139,13 +169,13 @@ void take_inputs()
         iSetColor(164,260,164);
         iFilledRectangle(1210,590,280,60);
 		iSetColor(0,0,0);
-		iText(1220,600,v[1],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][1],GLUT_BITMAP_8_BY_13);
         iSetColor(0,0,0);
         iText(1220,530,"c:",GLUT_BITMAP_HELVETICA_18);
         iSetColor(164,260,164);
         iFilledRectangle(1210,450,280,60);
 		iSetColor(0,0,0);
-		iText(1220,460,v[2],GLUT_BITMAP_8_BY_13);
+		iText(1220,460,v[r][2],GLUT_BITMAP_8_BY_13);
 		iSetColor(164,280,164);
 		iFilledRectangle(1310,30,50,50);
 		iFilledRectangle(1210,30,50,30);
@@ -158,25 +188,9 @@ void take_inputs()
 		
 			
 		
-		if(draw1)
-		{
-			for(double X=-10000,Y;X<=10000;X+=.5)
-			{
-				Y=(var[1]*(X-x_axis))+var[2]*(y_diff)+y_axis;
-				iSetColor(0,0,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,5,100);
-				}
-			}
-			// char buffer[30];
-			// sprintf(buffer,"y=%.1fx+%.1f",var[1],var[2]);
-			// iSetColor(0,0,0);
-			// iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
-			
-		}
+		
     }
-	if(format==2)
+	if(format[r]==2)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -194,25 +208,14 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-        iText(1220,600,v[3],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[4],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[5],GLUT_BITMAP_8_BY_13);
+        iText(1220,600,v[r][3],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][4],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][5],GLUT_BITMAP_8_BY_13);
         
-        if(draw1)
-		{
-			for(double X=-10000,Y;X<=10000;X+=.5)
-			{
-				Y=-(var[3]*(X-x_axis)+var[5]*y_diff)/var[4]+y_axis;
-				iSetColor(0,0,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,5,100);
-				}
-			}
-		}
+        
 		
 	}
-	if(format==3)
+	if(format[r]==3)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -228,23 +231,12 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[6],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[7],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][6],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][7],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-		{
-			for(double X=-10000,Y;X<=10000;X+=0.5)
-			{
-				Y=(y_diff-(X-x_axis)/var[6])*var[7]+y_axis;
-				iSetColor(0,0,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,5,100);
-				}
-			}
-		}
+		
 	}
-	if(format==4)
+	if(format[r]==4)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -258,22 +250,11 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[8],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][8],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-		{
-			for(double X,Y=-10000;Y<=10000;Y+=0.5)
-			{
-				X=x_axis+var[8]*x_diff;
-				iSetColor(0,0,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,5,100);
-				}
-			}
-		}
+		
 	}
-    if(format==5)
+    if(format[r]==5)
     {
         iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -291,24 +272,13 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-        iText(1220,600,v[9],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[10],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[11],GLUT_BITMAP_8_BY_13);
+        iText(1220,600,v[r][9],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][10],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][11],GLUT_BITMAP_8_BY_13);
 
-        if(draw1)
-        {
-            for(double X=-1000,Y;X<=1000;X+=0.01)
-            {
-                Y=var[9]*(pow((X-x_axis),2))/x_diff+var[10]*(X-x_axis)+var[11]*y_diff+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+       
     }
-	if(format==6)
+	if(format[r]==6)
     {
         iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -326,24 +296,13 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-        iText(1220,600,v[12],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[13],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[14],GLUT_BITMAP_8_BY_13);
+        iText(1220,600,v[r][12],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][13],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][14],GLUT_BITMAP_8_BY_13);
 
-        if(draw1)
-        {
-            for(double Y=-1000,X;Y<=1000;Y+=0.01)
-            {
-                X=var[12]*(pow((Y-y_axis),2))/y_diff+var[13]*(Y-y_axis)+var[14]*y_diff+x_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+        
     }
-	if(format==7)
+	if(format[r]==7)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -363,27 +322,16 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[15],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[16],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[17],GLUT_BITMAP_8_BY_13);
-		iText(1220,200,v[18],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][15],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][16],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][17],GLUT_BITMAP_8_BY_13);
+		iText(1220,200,v[r][18],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                Y=(var[15]*sin((var[16]*(X-x_axis)/(x_diff)+var[17]*y_diff)/(2*PI))+var[18])*y_diff*10+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+		
 
 		
 	}
-	if(format==8)
+	if(format[r]==8)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -403,27 +351,16 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[19],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[20],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[21],GLUT_BITMAP_8_BY_13);
-		iText(1220,200,v[22],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][19],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][20],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][21],GLUT_BITMAP_8_BY_13);
+		iText(1220,200,v[r][22],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                Y=(var[19]*cos((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))+var[22])*y_diff*10+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+
 
 		
 	}
-	if(format==9)
+	if(format[r]==9)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -443,30 +380,16 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[23],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[24],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[25],GLUT_BITMAP_8_BY_13);
-		iText(1220,200,v[26],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][23],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][24],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][25],GLUT_BITMAP_8_BY_13);
+		iText(1220,200,v[r][26],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
-				
-				Y=(var[23]*tan((var[24]*(X-x_axis)/(x_diff)+var[25]*y_diff)/(2*PI))+var[26])*y_diff*10+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-				
-            }
-        }
+		
 
 		
 	}
-	if(format==10)
+	if(format[r]==10)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -486,28 +409,14 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[27],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[28],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[29],GLUT_BITMAP_8_BY_13);
-		iText(1220,200,v[30],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][27],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][28],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][29],GLUT_BITMAP_8_BY_13);
+		iText(1220,200,v[r][30],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
-				
-				Y=(var[27]* (1/tan((var[28]*(X-x_axis)/(x_diff)+var[29]*y_diff)/(2*PI)))+var[30])*y_diff*10+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-				
-            }
-        }
+
 	}
-	if(format==11)
+	if(format[r]==11)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -527,28 +436,14 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[31],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[32],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[33],GLUT_BITMAP_8_BY_13);
-		iText(1220,200,v[34],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][31],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][32],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][33],GLUT_BITMAP_8_BY_13);
+		iText(1220,200,v[r][34],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
-				
-				Y=(var[31]* (1/sin((var[32]*(X-x_axis)/(x_diff)+var[33]*y_diff)/(2*PI)))+var[34])*y_diff*10+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-				
-            }
-        }
+		
 	}
-	if(format==12)
+	if(format[r]==12)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -568,28 +463,14 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[35],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[36],GLUT_BITMAP_8_BY_13);
-		iText(1220,320,v[37],GLUT_BITMAP_8_BY_13);
-		iText(1220,200,v[38],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][35],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][36],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][37],GLUT_BITMAP_8_BY_13);
+		iText(1220,200,v[r][38],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
-				
-				Y=(var[35]* (1/cos((var[36]*(X-x_axis)/(x_diff)+var[37]*y_diff)/(2*PI)))+var[38])*y_diff*10+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-				
-            }
-        }
+		
 	}
-	if(format==13)
+	if(format[r]==13)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -605,23 +486,12 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[39],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[40],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][39],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][40],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                Y=pow(var[39],var[40]*(X-x_axis)/x_diff)*y_diff+y_axis+5;
-				iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+		
 	}
-	if(format==14)
+	if(format[r]==14)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -635,22 +505,11 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[41],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][41],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double X=-20,Y;X<=1500;X+=0.05)
-            {
-                Y=exp(var[41]*(X-x_axis)/x_diff)*y_diff+y_axis+5;
-				iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+
 	}
-	if(format==15)
+	if(format[r]==15)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -664,22 +523,11 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[42],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][42],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double Y=-1000,X;Y<=1500;Y+=0.05)
-            {
-				X=(pow(10,(Y-y_axis)/y_diff)*x_diff)/var[42]+x_axis;
-				iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+
 	}
-	if(format==16)
+	if(format[r]==16)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -693,22 +541,11 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[44],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][43],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double Y=-1000,X;Y<=1500;Y+=0.05)
-            {
-				X=(pow(e,(Y-y_axis)/y_diff)*x_diff)/var[44]+x_axis;
-				iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+		
 	}
-	if(format==17)
+	if(format[r]==17)
 	{
 		iSetColor(164,260,164);
         iFilledRectangle(1210,730,280,60);
@@ -724,21 +561,10 @@ void take_inputs()
 		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
-		iText(1220,600,v[45],GLUT_BITMAP_8_BY_13);
-        iText(1220,460,v[46],GLUT_BITMAP_8_BY_13);
+		iText(1220,600,v[r][44],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][45],GLUT_BITMAP_8_BY_13);
 
-		if(draw1)
-        {
-            for(double Y=-1000,X;Y<=1500;Y+=0.05)
-            {
-                X=(pow(var[45],(Y-y_axis)/y_diff)*x_diff)/var[46]+x_axis;
-				iSetColor(0,255,0);
-				if(X<=1200)
-				{
-					iFilledCircle(X,Y,2,100);
-				}
-            }
-        }
+		
 	}
 	
 	
@@ -801,29 +627,31 @@ void iDraw() {
 	
 	iSetColor(144,238,144);
 	iFilledRectangle(1200,0,300,800);
-    if(function==0)
+
+	
+    if(function[r]==0)
     {
         draw_menu();
     }
-    else if(format==0)
+    else if(format[r]==0)
     {
-        if(function==1)
+        if(function[r]==1)
         {
             draw_linear_menu();
         }
-        if(function==2)
+        if(function[r]==2)
         {
             draw_polynomial_menu();
         }
-        if(function==3)
+        if(function[r]==3)
         {
             draw_trig_menu();
         }
-        if(function==4)
+        if(function[r]==4)
         {
             draw_exp_menu();
         }
-        if(function==5)
+        if(function[r]==5)
         {
             draw_log_menu();
         }
@@ -860,129 +688,375 @@ void iDraw() {
 
 	//printing the functions
 
-	if(draw1)
+	for(int h=0;h<10;h++)
 	{
-		if(format==1)
+
+	
+
+
+	if(draw[h])
+	{
+		if(format[h]==1)
 		{
 			char buffer[30];
-			sprintf(buffer,"y=%.1fx+%.1f",var[1],var[2]);
+			sprintf(buffer,"y=%.1fx+%.1f",var[h][1],var[h][2]);
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-10000,Y;X<=10000;X+=.5)
+			{
+				Y=(var[h][1]*(X-x_axis))+var[h][2]*(y_diff)+y_axis;
+				iSetColor(0,0,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,5,100);
+				}
+			}
 			
 		}
-		if(format==2)
+		if(format[h]==2)
 		{
 			char buffer[30];
-			sprintf(buffer,"y=%.1fx+%.1fy+%.1f",var[3],var[4],var[5]);
+			sprintf(buffer,"y=%.1fx+%.1fy+%.1f",var[h][3],var[h][4],var[h][5]);
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-10000,Y;X<=10000;X+=.5)
+			{
+				Y=-(var[h][3]*(X-x_axis)+var[h][5]*y_diff)/var[h][4]+y_axis;
+				iSetColor(0,0,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,5,100);
+				}
+			}
 			
 		}
-		if(format==3)
+		if(format[h]==3)
 		{
 			char buffer[30];
-			sprintf(buffer,"y=x/%.1f+y/%.1f=1",var[6],var[7]);
+			sprintf(buffer,"y=x/%.1f+y/%.1f=1",var[h][6],var[h][7]);
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-10000,Y;X<=10000;X+=0.5)
+			{
+				Y=(y_diff-(X-x_axis)/var[h][6])*var[h][7]+y_axis;
+				iSetColor(0,0,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,5,100);
+				}
+			}
 			
 		}
-		if(format==4)
+		if(format[h]==4)
 		{
 			char buffer[30];
-			sprintf(buffer,"x=%.1f",var[8]);
+			sprintf(buffer,"x=%.1f",var[h][8]);
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X,Y=-10000;Y<=10000;Y+=0.5)
+			{
+				X=x_axis+var[h][8]*x_diff;
+				iSetColor(0,0,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,5,100);
+				}
+			}
 			
 		}
-		if(format==5)
+		if(format[h]==5)
 		{
 			char buffer[30];
-			sprintf(buffer,"y=%.1fx^2 + %.1fx + %.1f",var[9],var[10],var[11]);
+			sprintf(buffer,"y=%.1fx^2 + %.1fx + %.1f",var[h][9],var[h][10],var[h][11]);
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-1000,Y;X<=1000;X+=0.01)
+            {
+                Y=var[h][9]*(pow((X-x_axis),2))/x_diff+var[h][10]*(X-x_axis)+var[h][11]*y_diff+y_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }
 			
 		}
-		if(format==6)
+		if(format[h]==6)
 		{
 			char buffer[30];
-			sprintf(buffer,"x=%.1fy^2 + %.1fy + %.1f",var[12],var[13],var[14]);
+			sprintf(buffer,"x=%.1fy^2 + %.1fy + %.1f",var[h][12],var[h][13],var[h][14]);
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double Y=-1000,X;Y<=1000;Y+=0.01)
+            {
+                X=var[h][12]*(pow((Y-y_axis),2))/y_diff+var[h][13]*(Y-y_axis)+var[h][14]*y_diff+x_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }
 			
 		}
-		if(format==6)
-		{
-			char buffer[30];
-			sprintf(buffer,"x=%.1fy^2 + %.1fy + %.1f",var[12],var[13],var[14]);
-			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+		// if(format==6)
+		// {
+		// 	char buffer[30];
+		// 	sprintf(buffer,"x=%.1fy^2 + %.1fy + %.1f",var[12],var[13],var[14]);
+		// 	iSetColor(0,0,0);
+		// 	iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			
-		}
-		if(format==7)
+		// }
+		if(format[h]==7)
 		{
 			char buffer[30];
-			if(var[17]==0 && var[18]==0)
-			sprintf(buffer,"y=%.1fsin(%.1fx)",var[15],var[16],var[17],var[18]);
-			else if(var[18]==0) 
-			sprintf(buffer,"y=%.1fsin(%.1fx+%.1f)",var[15],var[16],var[17]);
-			else if(var[17]==0)
-			sprintf(buffer,"y=%.1fsin(%.1fx)+%.1f",var[15],var[16],var[18]);
+			if(var[h][17]==0 && var[h][18]==0)
+			sprintf(buffer,"y=%.1fsin(%.1fx)",var[h][15],var[h][16],var[h][17],var[h][18]);
+			else if(var[h][18]==0) 
+			sprintf(buffer,"y=%.1fsin(%.1fx+%.1f)",var[h][15],var[h][16],var[h][17]);
+			else if(var[h][17]==0)
+			sprintf(buffer,"y=%.1fsin(%.1fx)+%.1f",var[h][15],var[h][16],var[h][18]);
 
 			else 
-			{sprintf(buffer,"y=%.1fsin(%.1fx+%.1f)+%.1f",var[15],var[16],var[17],var[18]);}
+			{sprintf(buffer,"y=%.1fsin(%.1fx+%.1f)+%.1f",var[h][15],var[h][16],var[h][17],var[h][18]);}
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                Y=(var[h][15]*sin((var[h][16]*(X-x_axis)/(x_diff)+var[h][17]*y_diff)/(2*PI))+var[h][18])*y_diff*10+y_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }
 			
 		}
-		if(format==8)
+		if(format[h]==8)
 		{
 			char buffer[30];
-			if(var[21]==0 && var[22]==0)
-			sprintf(buffer,"y=%.1fcos(%.1fx)",var[19],var[20],var[21],var[22]);
-			else if(var[22]==0) 
-			sprintf(buffer,"y=%.1fcos(%.1fx+%.1f)",var[19],var[20],var[21]);
-			else if(var[21]==0)
-			sprintf(buffer,"y=%.1fcos(%.1fx)+%.1f",var[19],var[20],var[22]);
+			if(var[h][21]==0 && var[h][22]==0)
+			sprintf(buffer,"y=%.1fcos(%.1fx)",var[h][19],var[h][20],var[h][21],var[h][22]);
+			else if(var[h][22]==0) 
+			sprintf(buffer,"y=%.1fcos(%.1fx+%.1f)",var[h][19],var[h][20],var[h][21]);
+			else if(var[h][21]==0)
+			sprintf(buffer,"y=%.1fcos(%.1fx)+%.1f",var[h][19],var[h][20],var[h][22]);
 
 			else 
-			{sprintf(buffer,"y=%.1fcos(%.1fx+%.1f)+%.1f",var[19],var[20],var[21],var[22]);}
+			{sprintf(buffer,"y=%.1fcos(%.1fx+%.1f)+%.1f",var[h][19],var[h][20],var[h][21],var[h][22]);}
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                Y=(var[h][19]*cos((var[h][20]*(X-x_axis)/(x_diff)+var[h][21]*y_diff)/(PI))+var[h][22])*y_diff*10+y_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }
 			
 		}
-		if(format==9)
+		if(format[h]==9)
 		{
 			char buffer[30];
-			if(var[25]==0 && var[26]==0)
-			sprintf(buffer,"y=%.1ftan(%.1fx)",var[23],var[24],var[25],var[26]);
-			else if(var[26]==0) 
-			sprintf(buffer,"y=%.1ftan(%.1fx+%.1f)",var[23],var[24],var[25]);
-			else if(var[25]==0)
-			sprintf(buffer,"y=%.1ftan(%.1fx)+%.1f",var[23],var[24],var[26]);
+			if(var[h][25]==0 && var[h][26]==0)
+			sprintf(buffer,"y=%.1ftan(%.1fx)",var[h][23],var[h][24],var[h][25],var[h][26]);
+			else if(var[h][26]==0) 
+			sprintf(buffer,"y=%.1ftan(%.1fx+%.1f)",var[h][23],var[h][24],var[h][25]);
+			else if(var[h][25]==0)
+			sprintf(buffer,"y=%.1ftan(%.1fx)+%.1f",var[h][23],var[h][24],var[h][26]);
 
 			else 
-			{sprintf(buffer,"y=%.1ftan(%.1fx+%.1f)+%.1f",var[23],var[24],var[25],var[26]);}
+			{sprintf(buffer,"y=%.1ftan(%.1fx+%.1f)+%.1f",var[h][23],var[h][24],var[h][25],var[h][26]);}
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
+				
+				Y=(var[h][23]*tan((var[h][24]*(X-x_axis)/(x_diff)+var[h][25]*y_diff)/(2*PI))+var[h][26])*y_diff*10+y_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+				
+            }
 			
 		}
-		if(format==10)
+		if(format[h]==10)
 		{
 			char buffer[30];
-			if(var[29]==0 && var[30]==0)
-			sprintf(buffer,"y=%.1fcot(%.1fx)",var[27],var[28],var[29],var[30]);
-			else if(var[30]==0) 
-			sprintf(buffer,"y=%.1fcot(%.1fx+%.1f)",var[27],var[28],var[29]);
-			else if(var[29]==0)
-			sprintf(buffer,"y=%.1fcot(%.1fx)+%.1f",var[27],var[28],var[30]);
+			if(var[h][29]==0 && var[h][30]==0)
+			sprintf(buffer,"y=%.1fcot(%.1fx)",var[h][27],var[h][28],var[h][29],var[h][30]);
+			else if(var[h][30]==0) 
+			sprintf(buffer,"y=%.1fcot(%.1fx+%.1f)",var[h][27],var[h][28],var[h][29]);
+			else if(var[h][29]==0)
+			sprintf(buffer,"y=%.1fcot(%.1fx)+%.1f",var[h][27],var[h][28],var[h][30]);
 
 			else 
-			{sprintf(buffer,"y=%.1fcot(%.1fx+%.1f)+%.1f",var[27],var[28],var[29],var[30]);}
+			{sprintf(buffer,"y=%.1fcot(%.1fx+%.1f)+%.1f",var[h][27],var[h][28],var[h][29],var[h][30]);}
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
+				
+				Y=(var[h][27]* (1/tan((var[h][28]*(X-x_axis)/(x_diff)+var[h][29]*y_diff)/(2*PI)))+var[h][30])*y_diff*10+y_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+				
+            }
 			
+		}
+		if(format[h]==11)
+		{
+			char buffer[30];
+			if(var[h][33]==0 && var[h][34]==0)
+			sprintf(buffer,"y=%.1fcosec(%.1fx)",var[h][31],var[h][32],var[h][33],var[h][34]);
+			else if(var[h][34]==0) 
+			sprintf(buffer,"y=%.1fcosec(%.1fx+%.1f)",var[h][31],var[h][32],var[h][33]);
+			else if(var[h][33]==0)
+			sprintf(buffer,"y=%.1fcosec(%.1fx)+%.1f",var[h][31],var[h][32],var[h][34]);
+
+			else 
+			{sprintf(buffer,"y=%.1fcosec(%.1fx+%.1f)+%.1f",var[h][31],var[h][32],var[h][33],var[h][34]);}
+			iSetColor(0,0,0);
+			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
+				
+				Y=(var[h][31]* (1/sin((var[h][32]*(X-x_axis)/(x_diff)+var[h][33]*y_diff)/(2*PI)))+var[h][34])*y_diff*10+y_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+				
+            }
+			
+			
+		}
+		if(format[h]==12)
+		{
+			char buffer[30];
+			if(var[h][37]==0 && var[h][38]==0)
+			sprintf(buffer,"y=%.1fsec(%.1fx)",var[h][35],var[h][36],var[h][37],var[h][38]);
+			else if(var[h][38]==0) 
+			sprintf(buffer,"y=%.1fsec(%.1fx+%.1f)",var[h][35],var[h][36],var[h][37]);
+			else if(var[h][37]==0)
+			sprintf(buffer,"y=%.1fsec(%.1fx)+%.1f",var[h][35],var[h][36],var[h][38]);
+
+			else 
+			{sprintf(buffer,"y=%.1fsec(%.1fx+%.1f)+%.1f",var[h][35],var[h][36],var[h][37],var[h][38]);}
+			iSetColor(0,0,0);
+			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
+				
+				Y=(var[h][35]* (1/cos((var[h][36]*(X-x_axis)/(x_diff)+var[h][37]*y_diff)/(2*PI)))+var[h][38])*y_diff*10+y_axis;
+                iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+				
+            }
+			
+			
+		}
+		if(format[h]==13)
+		{
+			char buffer[30];
+			
+			sprintf(buffer,"y=%.1lf^(%.1lfx)",var[h][39],var[h][40]);
+			iSetColor(0,0,0);
+			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                Y=pow(var[h][39],var[h][40]*(X-x_axis)/x_diff)*y_diff+y_axis+5;
+				iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }	
+		}
+		if(format[h]==14)
+		{
+			char buffer[30];
+			
+			sprintf(buffer,"y=e^(%.1lfx)",var[h][41]);
+			iSetColor(0,0,0);
+			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double X=-20,Y;X<=1500;X+=0.05)
+            {
+                Y=exp(var[h][41]*(X-x_axis)/x_diff)*y_diff+y_axis+5;
+				iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }	
+		}
+		if(format[h]==15)
+		{
+			char buffer[30];
+			
+			sprintf(buffer,"y=log(%.1lfx)",var[h][42]);
+			iSetColor(0,0,0);
+			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double Y=-1000,X;Y<=1500;Y+=0.05)
+            {
+				X=(pow(10,(Y-y_axis)/y_diff)*x_diff)/var[h][42]+x_axis;
+				iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }	
+		}
+		if(format[h]==16)
+		{
+			char buffer[30];
+			
+			sprintf(buffer,"y=ln(%.1lfx)",var[h][43]);
+			iSetColor(0,0,0);
+			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double Y=-1000,X;Y<=1500;Y+=0.05)
+            {
+				X=(pow(e,(Y-y_axis)/y_diff)*x_diff)/var[h][43]+x_axis;
+				iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }	
+		}
+		if(format[h]==17)
+		{
+			char buffer[30];
+			
+			sprintf(buffer,"y=log%.1lf(%.1lfx)",var[h][44],var[h][45]);
+			iSetColor(0,0,0);
+			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			for(double Y=-1000,X;Y<=1500;Y+=0.05)
+            {
+                X=(pow(var[h][44],(Y-y_axis)/y_diff)*x_diff)/var[h][45]+x_axis;
+				iSetColor(0,255,0);
+				if(X<=1200)
+				{
+					iFilledCircle(X,Y,2,100);
+				}
+            }
 		}
 		
+	}
 	}
 
 }
@@ -1056,404 +1130,408 @@ void iMouse(int button, int state, int mx2, int my2) {
 		{
 			//go_back=true;
 		}
+		
 
 
-
-
-        if(function==0)
+        if(function[r]==0)
         {
             if(mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
             {
-                function=1;
+                function[r]=1;
+				//for(int p=r+1;p<10;p++) function[p]=-1;
             }
             else if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
             {
-                function=2;
+                function[r]=2;
+				//for(int p=r+1;p<10;p++) function[p]=-1;
             }
             else if(mx2>=1210 && mx2<=1490 && my2>=520 && my2<=580)
             {
-                function=3;
+                function[r]=3;
+				//for(int p=r+1;p<10;p++) function[p]=-1;
             }
             else if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
             {
-                function=4;
+                function[r]=4;
+				//for(int p=r+1;p<10;p++) function[p]=-1;
             }
             else if(mx2>=1210 && mx2<=1490 && my2>=380 && my2<=440)
             {
-                function=5;
+                function[r]=5;
+				//for(int p=r+1;p<10;p++) function[p]=-1;
             }
             
         }
-        else if(format==0)
+        else if(format[r]==0)
         {
-            if(function==1 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
+            if(function[r]==1 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
             {
-                format=1;
+                format[r]=1;
             }
-            else if(function==1 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
+            else if(function[r]==1 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
             {
-                format=2;
+                format[r]=2;
             }
-            else if(function==1 && mx2>=1210 && mx2<=1490 && my2>=520 && my2<=580)
+            else if(function[r]==1 && mx2>=1210 && mx2<=1490 && my2>=520 && my2<=580)
             {
-                format=3;
+                format[r]=3;
             }
-            else if(function==1 && mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
+            else if(function[r]==1 && mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
             {
-                format=4;
+                format[r]=4;
             }
-            else if(function==2 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
+            else if(function[r]==2 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
             {
-                format=5;
+                format[r]=5;
             }
-            else if(function==2 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
+            else if(function[r]==2 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
             {
-                format=6;
+                format[r]=6;
             }
-            else if(function==3 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
+            else if(function[r]==3 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
             {
-                format=7;
+                format[r]=7;
             }
-            else if(function==3 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
+            else if(function[r]==3 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
             {
-                format=8;
+                format[r]=8;
             }
-            else if(function==3 && mx2>=1210 && mx2<=1490 && my2>=520 && my2<=580)
+            else if(function[r]==3 && mx2>=1210 && mx2<=1490 && my2>=520 && my2<=580)
             {
-                format=9;
+                format[r]=9;
             }
-            else if(function==3 && mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
+            else if(function[r]==3 && mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
             {
-                format=10;
+                format[r]=10;
             }
-            else if(function==3 && mx2>=1210 && mx2<=1490 && my2>=380 && my2<=440)
+            else if(function[r]==3 && mx2>=1210 && mx2<=1490 && my2>=380 && my2<=440)
             {
-                format=11;
+                format[r]=11;
             }
-            else if(function==3 && mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
+            else if(function[r]==3 && mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
             {
-                format=12;
+                format[r]=12;
             }
-            else if(function==4 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
+            else if(function[r]==4 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
             {
-                format=13;
+                format[r]=13;
             }
-            else if(function==4 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
+            else if(function[r]==4 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
             {
-                format=14;
+                format[r]=14;
             }
-            else if(function==5 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
+            else if(function[r]==5 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
             {
-                format=15;
+                format[r]=15;
             }
-            else if(function==5 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
+            else if(function[r]==5 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
             {
-                format=16;
+                format[r]=16;
             }
-            else if(function==5 && mx2>=1210 && mx2<=1490 && my2>=450 && my2<=580)
+            else if(function[r]==5 && mx2>=1210 && mx2<=1490 && my2>=450 && my2<=580)
             {
-                format=17;
+                format[r]=17;
             }
         }
 		else 
 		{
-			if(format==1)
+			if(format[r]==1)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[1]=true;
+					variable[r][1]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[2]=true;
+					variable[r][2]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==2)
+			if(format[r]==2)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[3]=true;
+					variable[r][3]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[4]=true;
+					variable[r][4]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[5]=true;
+					variable[r][5]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==3)
+			if(format[r]==3)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[6]=true;
+					variable[r][6]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[7]=true;
+					variable[r][7]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==4)
+			if(format[r]==4)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[8]=true;
+					variable[r][8]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-            if(format==5)
+            if(format[r]==5)
             {
                 if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[9]=true;
+					variable[r][9]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[10]=true;
+					variable[r][10]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[11]=true;
+					variable[r][11]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
             }
-			if(format==6)
+			if(format[r]==6)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[12]=true;
+					variable[r][12]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[13]=true;
+					variable[r][13]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[14]=true;
+					variable[r][14]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==7)
+			if(format[r]==7)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[15]=true;
+					variable[r][15]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[16]=true;
+					variable[r][16]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[17]=true;
+					variable[r][17]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=170 && my2<=230)
 				{
-					variable[18]=true;
+					variable[r][18]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==8)
+			if(format[r]==8)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[19]=true;
+					variable[r][19]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[20]=true;
+					variable[r][20]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[21]=true;
+					variable[r][21]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=170 && my2<=230)
 				{
-					variable[22]=true;
+					variable[r][22]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==9)
+			if(format[r]==9)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[23]=true;
+					variable[r][23]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[24]=true;
+					variable[r][24]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[25]=true;
+					variable[r][25]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=170 && my2<=230)
 				{
-					variable[26]=true;
+					variable[r][26]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==10)
+			if(format[r]==10)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[27]=true;
+					variable[r][27]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[28]=true;
+					variable[r][28]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[29]=true;
+					variable[r][29]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=170 && my2<=230)
 				{
-					variable[30]=true;
+					variable[r][30]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==11)
+			if(format[r]==11)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[31]=true;
+					variable[r][31]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[32]=true;
+					variable[r][32]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[33]=true;
+					variable[r][33]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=170 && my2<=230)
 				{
-					variable[34]=true;
+					variable[r][34]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==12)
+			if(format[r]==12)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[35]=true;
+					variable[r][35]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[36]=true;
+					variable[r][36]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
 				{
-					variable[37]=true;
+					variable[r][37]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=170 && my2<=230)
 				{
-					variable[38]=true;
+					variable[r][38]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==13)
+			if(format[r]==13)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[39]=true;
+					variable[r][39]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[40]=true;
+					variable[r][40]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==14)
+			if(format[r]==14)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[41]=true;
+					variable[r][41]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==15)
+			if(format[r]==15)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[43]=true;
+					variable[r][42]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==16)
+			if(format[r]==16)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[44]=true;
+					variable[r][43]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
-			if(format==17)
+			if(format[r]==17)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
 				{
-					variable[45]=true;
+					variable[r][44]=true;
 				}
 				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
 				{
-					variable[46]=true;
+					variable[r][45]=true;
 				}
 				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
 				{
-					draw1=true;
+					draw[r]=true;
 				}
 			}
 		}
@@ -1473,8 +1551,12 @@ void iMouse(int button, int state, int mx2, int my2) {
 	//back button function
 	if(mx2>=1210 && mx2<=1260 && my2>=30 && my2<=60)
 	{
-		if(format!=0) format=0,draw1=true;
-		else if(function!=0) function=0,draw1=true;
+		// if(draw1)
+		// {
+		// 	if(format!=0) format=0,draw1=true;
+		// 	else if(function!=0) function=0,draw1=true;
+		// }
+		r+=1;
 	}
 	
 	
@@ -1508,23 +1590,23 @@ void iKeyboard(unsigned char key) {
 	}
 	for(int p=1;p<50;p++)
 	{
-		if(variable[p])
+		if(variable[r][p])
 		{
-			int index=strlen(v[p]);
+			int index=strlen(v[r][p]);
 			if(key!='\r' && key!='\b')
 			{
-				v[p][index]=key;
-				v[p][index+1]='\0';
+				v[r][p][index]=key;
+				v[r][p][index+1]='\0';
 			}
 			else if(key=='\b')
 			{
-				v[p][index-1]='\0';
+				v[r][p][index-1]='\0';
 				index--;
 			}
 			else if(key=='\r')
 			{
-				variable[p]=false;
-				var[p]=atof(v[p]);
+				variable[r][p]=false;
+				var[r][p]=atof(v[r][p]);
 			}
 		}
 	}
@@ -1560,7 +1642,7 @@ int main() {
 	//place your own initialization codes here.
 
       //scanf("%d%d",m,c);
-	
+	if(r==0) clear_variables;
 	iInitialize(1500, 800, "project_trial_1");
 	return 0;
 }
