@@ -16,6 +16,9 @@ char v[10][50][10];
 //int i1,i2;
 float var[10][50];
 
+double slider=1365,slider_i,slider2=1365;
+double sliders[10][50];
+
 // for(int i1=0;i1<10;i1++)
 // {
 // 	for(int i2=0;i2<50;i2++)
@@ -32,7 +35,9 @@ void clear_variables()
 			v[i1][i2][0]='\0';
 		}
 	}
+	
 }
+
 
 
 
@@ -41,7 +46,6 @@ void clear_variables()
 
 int origin_x=x_axis,origin_y=y_axis;
 const double PI=M_PI,e=exp(1.0);
-
 
 
 
@@ -185,6 +189,17 @@ void take_inputs()
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
 		//if(draw1)
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		//iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][1],680,10,20);
+		iFilledRectangle(sliders[r][2],540,10,20);
+		//iFilledRectangle(1365,400,10,20);
+		//iFilledRectangle(1365,260,10,20);
 		
 			
 		
@@ -212,6 +227,17 @@ void take_inputs()
         iText(1220,460,v[r][4],GLUT_BITMAP_8_BY_13);
 		iText(1220,320,v[r][5],GLUT_BITMAP_8_BY_13);
         
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][3],680,10,20);
+		iFilledRectangle(sliders[r][4],540,10,20);
+		iFilledRectangle(sliders[r][5],400,10,20);
+		//iFilledRectangle(1365,260,10,20);
         
 		
 	}
@@ -234,6 +260,17 @@ void take_inputs()
 		iText(1220,600,v[r][6],GLUT_BITMAP_8_BY_13);
         iText(1220,460,v[r][7],GLUT_BITMAP_8_BY_13);
 
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		//iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][6],680,10,20);
+		iFilledRectangle(sliders[r][7],540,10,20);
+		//iFilledRectangle(sliders[r][5],400,10,20);
+		//iFilledRectangle(1365,260,10,20);
 		
 	}
 	if(format[r]==4)
@@ -251,6 +288,18 @@ void take_inputs()
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
 		iText(1220,600,v[r][8],GLUT_BITMAP_8_BY_13);
+
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		//iLine(1270,550,1470,550);
+		//iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][8],680,10,20);
+		//iFilledRectangle(sliders[r][7],540,10,20);
+		//iFilledRectangle(sliders[r][5],400,10,20);
+		//iFilledRectangle(1365,260,10,20);
 
 		
 	}
@@ -276,6 +325,19 @@ void take_inputs()
         iText(1220,460,v[r][10],GLUT_BITMAP_8_BY_13);
 		iText(1220,320,v[r][11],GLUT_BITMAP_8_BY_13);
 
+
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][9],680,10,20);
+		iFilledRectangle(sliders[r][10],540,10,20);
+		iFilledRectangle(sliders[r][11],400,10,20);
+		//iFilledRectangle(1365,260,10,20);
+
        
     }
 	if(format[r]==6)
@@ -299,6 +361,17 @@ void take_inputs()
         iText(1220,600,v[r][12],GLUT_BITMAP_8_BY_13);
         iText(1220,460,v[r][13],GLUT_BITMAP_8_BY_13);
 		iText(1220,320,v[r][14],GLUT_BITMAP_8_BY_13);
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][12],680,10,20);
+		iFilledRectangle(sliders[r][13],540,10,20);
+		iFilledRectangle(sliders[r][14],400,10,20);
+		//iFilledRectangle(1365,260,10,20);
 
         
     }
@@ -327,7 +400,19 @@ void take_inputs()
 		iText(1220,320,v[r][17],GLUT_BITMAP_8_BY_13);
 		iText(1220,200,v[r][18],GLUT_BITMAP_8_BY_13);
 
-		
+
+		//setting slider
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][15],680,10,20);
+		iFilledRectangle(sliders[r][16],540,10,20);
+		iFilledRectangle(sliders[r][17],400,10,20);
+		iFilledRectangle(sliders[r][18],260,10,20);
 
 		
 	}
@@ -355,6 +440,17 @@ void take_inputs()
         iText(1220,460,v[r][20],GLUT_BITMAP_8_BY_13);
 		iText(1220,320,v[r][21],GLUT_BITMAP_8_BY_13);
 		iText(1220,200,v[r][22],GLUT_BITMAP_8_BY_13);
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][19],680,10,20);
+		iFilledRectangle(sliders[r][20],540,10,20);
+		iFilledRectangle(sliders[r][21],400,10,20);
+		iFilledRectangle(sliders[r][22],260,10,20);
 
 
 
@@ -384,6 +480,19 @@ void take_inputs()
         iText(1220,460,v[r][24],GLUT_BITMAP_8_BY_13);
 		iText(1220,320,v[r][25],GLUT_BITMAP_8_BY_13);
 		iText(1220,200,v[r][26],GLUT_BITMAP_8_BY_13);
+
+
+		//sliders
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][23],680,10,20);
+		iFilledRectangle(sliders[r][24],540,10,20);
+		iFilledRectangle(sliders[r][25],400,10,20);
+		iFilledRectangle(sliders[r][26],260,10,20);
 
 		
 
@@ -415,6 +524,20 @@ void take_inputs()
 		iText(1220,200,v[r][30],GLUT_BITMAP_8_BY_13);
 
 
+
+		//sliders
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][27],680,10,20);
+		iFilledRectangle(sliders[r][28],540,10,20);
+		iFilledRectangle(sliders[r][29],400,10,20);
+		iFilledRectangle(sliders[r][30],260,10,20);
+
+
 	}
 	if(format[r]==11)
 	{
@@ -440,6 +563,21 @@ void take_inputs()
         iText(1220,460,v[r][32],GLUT_BITMAP_8_BY_13);
 		iText(1220,320,v[r][33],GLUT_BITMAP_8_BY_13);
 		iText(1220,200,v[r][34],GLUT_BITMAP_8_BY_13);
+
+//sliders
+
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][31],680,10,20);
+		iFilledRectangle(sliders[r][32],540,10,20);
+		iFilledRectangle(sliders[r][33],400,10,20);
+		iFilledRectangle(sliders[r][34],260,10,20);
+
 
 		
 	}
@@ -468,6 +606,23 @@ void take_inputs()
 		iText(1220,320,v[r][37],GLUT_BITMAP_8_BY_13);
 		iText(1220,200,v[r][38],GLUT_BITMAP_8_BY_13);
 
+
+		//sliders
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][35],680,10,20);
+		iFilledRectangle(sliders[r][36],540,10,20);
+		iFilledRectangle(sliders[r][37],400,10,20);
+		iFilledRectangle(sliders[r][38],260,10,20);
+
+
+
+
 		
 	}
 	if(format[r]==13)
@@ -489,6 +644,20 @@ void take_inputs()
 		iText(1220,600,v[r][39],GLUT_BITMAP_8_BY_13);
         iText(1220,460,v[r][40],GLUT_BITMAP_8_BY_13);
 
+
+		//sliders
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		//iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][39],680,10,20);
+		iFilledRectangle(sliders[r][40],540,10,20);
+		//iFilledRectangle(sliders[r][21],400,10,20);
+		//iFilledRectangle(sliders[r][22],260,10,20);
+
 		
 	}
 	if(format[r]==14)
@@ -508,6 +677,20 @@ void take_inputs()
 		iText(1220,600,v[r][41],GLUT_BITMAP_8_BY_13);
 
 
+
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		// iLine(1270,550,1470,550);
+		// iLine(1270,410,1470,410);
+		// iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][41],680,10,20);
+		// iFilledRectangle(sliders[r][20],540,10,20);
+		// iFilledRectangle(sliders[r][21],400,10,20);
+		// iFilledRectangle(sliders[r][22],260,10,20);
+
+
 	}
 	if(format[r]==15)
 	{
@@ -524,6 +707,17 @@ void take_inputs()
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
 		iText(1220,600,v[r][42],GLUT_BITMAP_8_BY_13);
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		// iLine(1270,550,1470,550);
+		// iLine(1270,410,1470,410);
+		// iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][42],680,10,20);
+		// iFilledRectangle(sliders[r][20],540,10,20);
+		// iFilledRectangle(sliders[r][21],400,10,20);
+		// iFilledRectangle(sliders[r][22],260,10,20);
 
 
 	}
@@ -542,6 +736,18 @@ void take_inputs()
 		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
 		iText(1220,600,v[r][43],GLUT_BITMAP_8_BY_13);
+
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		// iLine(1270,550,1470,550);
+		// iLine(1270,410,1470,410);
+		// iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][43],680,10,20);
+		// iFilledRectangle(sliders[r][20],540,10,20);
+		// iFilledRectangle(sliders[r][21],400,10,20);
+		// iFilledRectangle(sliders[r][22],260,10,20);
 
 		
 	}
@@ -563,6 +769,18 @@ void take_inputs()
 		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
 		iText(1220,600,v[r][44],GLUT_BITMAP_8_BY_13);
         iText(1220,460,v[r][45],GLUT_BITMAP_8_BY_13);
+
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		// iLine(1270,410,1470,410);
+		// iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][44],680,10,20);
+	    iFilledRectangle(sliders[r][45],540,10,20);
+		// iFilledRectangle(sliders[r][21],400,10,20);
+		// iFilledRectangle(sliders[r][22],260,10,20);
 
 		
 	}
@@ -708,7 +926,7 @@ void iDraw() {
 				iSetColor(0,0,0);
 				if(X<=1200)
 				{
-					iFilledCircle(X,Y,5,100);
+					iFilledCircle(X,Y,2,100);
 				}
 			}
 			
@@ -725,7 +943,7 @@ void iDraw() {
 				iSetColor(0,0,0);
 				if(X<=1200)
 				{
-					iFilledCircle(X,Y,5,100);
+					iFilledCircle(X,Y,2,100);
 				}
 			}
 			
@@ -742,7 +960,7 @@ void iDraw() {
 				iSetColor(0,0,0);
 				if(X<=1200)
 				{
-					iFilledCircle(X,Y,5,100);
+					iFilledCircle(X,Y,2,100);
 				}
 			}
 			
@@ -759,7 +977,7 @@ void iDraw() {
 				iSetColor(0,0,0);
 				if(X<=1200)
 				{
-					iFilledCircle(X,Y,5,100);
+					iFilledCircle(X,Y,2,100);
 				}
 			}
 			
@@ -774,7 +992,7 @@ void iDraw() {
             {
                 Y=var[h][9]*(pow((X-x_axis),2))/x_diff+var[h][10]*(X-x_axis)+var[h][11]*y_diff+y_axis;
                 iSetColor(0,255,0);
-				if(X<=1200)
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -822,7 +1040,7 @@ void iDraw() {
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
-                Y=(var[h][15]*sin((var[h][16]*(X-x_axis)/(x_diff)+var[h][17]*y_diff)/(2*PI))+var[h][18])*y_diff*10+y_axis;
+                Y=(var[h][15]*sin((var[h][16]*(X-x_axis)/(x_diff)+var[h][17]*y_diff))+var[h][18])*y_diff+y_axis;
                 iSetColor(0,255,0);
 				if(X<=1200)
 				{
@@ -847,7 +1065,7 @@ void iDraw() {
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
-                Y=(var[h][19]*cos((var[h][20]*(X-x_axis)/(x_diff)+var[h][21]*y_diff)/(PI))+var[h][22])*y_diff*10+y_axis;
+                Y=(var[h][19]*cos((var[h][20]*(X-x_axis)/(x_diff)+var[h][21]*y_diff))+var[h][22])*y_diff+y_axis;
                 iSetColor(0,255,0);
 				if(X<=1200)
 				{
@@ -870,13 +1088,13 @@ void iDraw() {
 			{sprintf(buffer,"y=%.1ftan(%.1fx+%.1f)+%.1f",var[h][23],var[h][24],var[h][25],var[h][26]);}
 			iSetColor(0,0,0);
 			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
-			for(double X=-20,Y;X<=1500;X+=0.05)
+			for(double X=-20,Y;X<=1500;X+=0.01)
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
-				Y=(var[h][23]*tan((var[h][24]*(X-x_axis)/(x_diff)+var[h][25]*y_diff)/(2*PI))+var[h][26])*y_diff*10+y_axis;
+				Y=(var[h][23]*tan((var[h][24]*(X-x_axis)/(x_diff)+var[h][25]*y_diff))+var[h][26])*y_diff+y_axis;
                 iSetColor(0,255,0);
-				if(X<=1200)
+				if(X<=1200 && X>=0 && Y>=0 && Y<=900)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -902,7 +1120,7 @@ void iDraw() {
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
-				Y=(var[h][27]* (1/tan((var[h][28]*(X-x_axis)/(x_diff)+var[h][29]*y_diff)/(2*PI)))+var[h][30])*y_diff*10+y_axis;
+				Y=(var[h][27]* (1/tan((var[h][28]*(X-x_axis)/(x_diff)+var[h][29]*y_diff)))+var[h][30])*y_diff+y_axis;
                 iSetColor(0,255,0);
 				if(X<=1200)
 				{
@@ -930,7 +1148,7 @@ void iDraw() {
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
-				Y=(var[h][31]* (1/sin((var[h][32]*(X-x_axis)/(x_diff)+var[h][33]*y_diff)/(2*PI)))+var[h][34])*y_diff*10+y_axis;
+				Y=(var[h][31]* (1/sin((var[h][32]*(X-x_axis)/(x_diff)+var[h][33]*y_diff)))+var[h][34])*y_diff+y_axis;
                 iSetColor(0,255,0);
 				if(X<=1200)
 				{
@@ -959,7 +1177,7 @@ void iDraw() {
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
-				Y=(var[h][35]* (1/cos((var[h][36]*(X-x_axis)/(x_diff)+var[h][37]*y_diff)/(2*PI)))+var[h][38])*y_diff*10+y_axis;
+				Y=(var[h][35]* (1/cos((var[h][36]*(X-x_axis)/(x_diff)+var[h][37]*y_diff)))+var[h][38])*y_diff+y_axis;
                 iSetColor(0,255,0);
 				if(X<=1200)
 				{
@@ -1074,7 +1292,7 @@ void iDraw() {
 	(mx, my) is the position where the mouse pointer is.
 	*/
 void iMouseMove(int mx1, int my1) {
-	//printf("x = %d, y= %d\n",mx1,my1);
+	printf("x = %d, y= %d\n",mx1,my1);
 	//place your codes here
 	//circle_x=mx;
 	//circle_y=my;
@@ -1092,6 +1310,433 @@ void iMouseMove(int mx1, int my1) {
         mx_i=mx_now;
         my_i=my_now;
     }
+
+
+
+
+		///sliders move!!!????***************
+
+
+		if(format[r]==1) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					//double temp=var[0][15];
+					sliders[r][1]=mx1;
+					double diff=sliders[r][1]-slider_i;
+					var[r][1]+=diff/50;
+					slider_i=sliders[r][1];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					//double temp=var[0][15];
+					sliders[r][2]=mx1;
+					double diff=sliders[r][2]-slider_i;
+					var[r][2]+=diff/50;
+					slider_i=sliders[r][2];
+				}
+			}
+		}
+		if(format[r]==2) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][3]=mx1;
+					double diff=sliders[r][3]-slider_i;
+					var[r][3]+=diff/50;
+					slider_i=sliders[r][3];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][4]=mx1;
+					double diff=sliders[r][4]-slider_i;
+					var[r][4]+=diff/50;
+					slider_i=sliders[r][4];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][5]=mx1;
+					double diff=sliders[r][5]-slider_i;
+					var[r][5]+=diff/50;
+					slider_i=sliders[r][5];
+				}
+			}
+		}
+		if(format[r]==3) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][6]=mx1;
+					double diff=sliders[r][6]-slider_i;
+					var[r][6]+=diff/50;
+					slider_i=sliders[r][6];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][7]=mx1;
+					double diff=sliders[r][7]-slider_i;
+					var[r][7]+=diff/50;
+					slider_i=sliders[r][7];
+				}
+			}
+		}
+		if(format[r]==4) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][8]=mx1;
+					double diff=sliders[r][8]-slider_i;
+					var[r][8]+=diff/50;
+					slider_i=sliders[r][8];
+				}
+			}
+		}
+		if(format[r]==5) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][9]=mx1;
+					double diff=sliders[r][9]-slider_i;
+					var[r][9]+=diff/50;
+					slider_i=sliders[r][9];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][10]=mx1;
+					double diff=sliders[r][10]-slider_i;
+					var[r][10]+=diff/50;
+					slider_i=sliders[r][10];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][11]=mx1;
+					double diff=sliders[r][11]-slider_i;
+					var[r][11]+=diff/50;
+					slider_i=sliders[r][11];
+				}
+			}
+		}
+		if(format[r]==6) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][12]=mx1;
+					double diff=sliders[r][12]-slider_i;
+					var[r][12]+=diff/50;
+					slider_i=sliders[r][12];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][13]=mx1;
+					double diff=sliders[r][13]-slider_i;
+					var[r][13]+=diff/50;
+					slider_i=sliders[r][13];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][14]=mx1;
+					double diff=sliders[r][14]-slider_i;
+					var[r][14]+=diff/50;
+					slider_i=sliders[r][14];
+				}
+			}
+		}
+		if(format[r]==7) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][15]=mx1;
+					double diff=sliders[r][15]-slider_i;
+					var[r][15]+=diff/50;
+					slider_i=sliders[r][15];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][16]=mx1;
+					double diff=sliders[r][16]-slider_i;
+					var[r][16]+=diff/50;
+					slider_i=sliders[r][16];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][17]=mx1;
+					double diff=sliders[r][17]-slider_i;
+					var[r][17]+=diff/50;
+					slider_i=sliders[r][17];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=260 && my1<=280)
+				{
+					sliders[r][18]=mx1;
+					double diff=sliders[r][18]-slider_i;
+					var[r][18]+=diff/50;
+					slider_i=sliders[r][18];
+				}
+			}
+		}
+		if(format[r]==8) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][19]=mx1;
+					double diff=sliders[r][19]-slider_i;
+					var[r][19]+=diff/50;
+					slider_i=sliders[r][19];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][20]=mx1;
+					double diff=sliders[r][20]-slider_i;
+					var[r][20]+=diff/50;
+					slider_i=sliders[r][20];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][21]=mx1;
+					double diff=sliders[r][21]-slider_i;
+					var[r][21]+=diff/50;
+					slider_i=sliders[r][21];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=260 && my1<=280)
+				{
+					sliders[r][22]=mx1;
+					double diff=sliders[r][22]-slider_i;
+					var[r][22]+=diff/50;
+					slider_i=sliders[r][22];
+				}
+			}
+		}
+		if(format[r]==9) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][23]=mx1;
+					double diff=sliders[r][23]-slider_i;
+					var[r][23]+=diff/50;
+					slider_i=sliders[r][23];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][24]=mx1;
+					double diff=sliders[r][24]-slider_i;
+					var[r][24]+=diff/50;
+					slider_i=sliders[r][24];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][25]=mx1;
+					double diff=sliders[r][25]-slider_i;
+					var[r][25]+=diff/50;
+					slider_i=sliders[r][25];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=260 && my1<=280)
+				{
+					sliders[r][26]=mx1;
+					double diff=sliders[r][26]-slider_i;
+					var[r][26]+=diff/50;
+					slider_i=sliders[r][26];
+				}
+			}
+		}
+		if(format[r]==10) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][27]=mx1;
+					double diff=sliders[r][27]-slider_i;
+					var[r][27]+=diff/50;
+					slider_i=sliders[r][27];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][28]=mx1;
+					double diff=sliders[r][28]-slider_i;
+					var[r][28]+=diff/50;
+					slider_i=sliders[r][28];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][29]=mx1;
+					double diff=sliders[r][29]-slider_i;
+					var[r][29]+=diff/50;
+					slider_i=sliders[r][29];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=260 && my1<=280)
+				{
+					sliders[r][30]=mx1;
+					double diff=sliders[r][30]-slider_i;
+					var[r][30]+=diff/50;
+					slider_i=sliders[r][30];
+				}
+			}
+		}
+		if(format[r]==11) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][31]=mx1;
+					double diff=sliders[r][31]-slider_i;
+					var[r][31]+=diff/50;
+					slider_i=sliders[r][31];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][32]=mx1;
+					double diff=sliders[r][32]-slider_i;
+					var[r][32]+=diff/50;
+					slider_i=sliders[r][32];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][33]=mx1;
+					double diff=sliders[r][33]-slider_i;
+					var[r][33]+=diff/50;
+					slider_i=sliders[r][33];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=260 && my1<=280)
+				{
+					sliders[r][34]=mx1;
+					double diff=sliders[r][34]-slider_i;
+					var[r][34]+=diff/50;
+					slider_i=sliders[r][34];
+				}
+			}
+		}
+		if(format[r]==12) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][35]=mx1;
+					double diff=sliders[r][35]-slider_i;
+					var[r][35]+=diff/50;
+					slider_i=sliders[r][35];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][36]=mx1;
+					double diff=sliders[r][36]-slider_i;
+					var[r][36]+=diff/50;
+					slider_i=sliders[r][36];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][37]=mx1;
+					double diff=sliders[r][37]-slider_i;
+					var[r][37]+=diff/50;
+					slider_i=sliders[r][37];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=260 && my1<=280)
+				{
+					sliders[r][38]=mx1;
+					double diff=sliders[r][38]-slider_i;
+					var[r][38]+=diff/50;
+					slider_i=sliders[r][38];
+				}
+			}
+		}
+		if(format[r]==13) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][39]=mx1;
+					double diff=sliders[r][39]-slider_i;
+					var[r][39]+=diff/50;
+					slider_i=sliders[r][39];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][40]=mx1;
+					double diff=sliders[r][40]-slider_i;
+					var[r][40]+=diff/50;
+					slider_i=sliders[r][40];
+				}
+			}
+		}
+		if(format[r]==14) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][41]=mx1;
+					double diff=sliders[r][41]-slider_i;
+					var[r][41]+=diff/50;
+					slider_i=sliders[r][41];
+				}
+			}
+		}
+		if(format[r]==15) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][42]=mx1;
+					double diff=sliders[r][42]-slider_i;
+					var[r][42]+=diff/50;
+					slider_i=sliders[r][42];
+				}
+			}
+		}
+		if(format[r]==16) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][43]=mx1;
+					double diff=sliders[r][43]-slider_i;
+					var[r][43]+=diff/50;
+					slider_i=sliders[r][43];
+				}
+			}
+		}
+		if(format[r]==17) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][44]=mx1;
+					double diff=sliders[r][44]-slider_i;
+					var[r][44]+=diff/50;
+					slider_i=sliders[r][44];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][45]=mx1;
+					double diff=sliders[r][45]-slider_i;
+					var[r][45]+=diff/50;
+					slider_i=sliders[r][45];
+				}
+			}
+		}
+	
 	
 }
 
@@ -1130,6 +1775,295 @@ void iMouse(int button, int state, int mx2, int my2) {
 		{
 			//go_back=true;
 		}
+
+
+
+			//////sliders select
+
+
+			if(format[r]==1) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][1];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][2];
+					}
+				}
+			}
+			if(format[r]==2) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][3];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][4];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][5];
+					}
+				}
+			}
+			if(format[r]==3) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][6];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][7];
+					}
+				}
+			}
+			if(format[r]==4) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][8];
+					}
+				}
+			}
+			if(format[r]==5) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][9];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][10];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][11];
+					}
+				}
+			}
+			if(format[r]==6) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][12];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][13];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][14];
+					}
+				}
+			}
+			if(format[r]==7) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][15];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][16];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][17];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=260 && my2<=280)
+					{
+						slider_i=sliders[r][18];
+					}
+				}
+			}
+			if(format[r]==8) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][19];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][20];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][21];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=260 && my2<=280)
+					{
+						slider_i=sliders[r][22];
+					}
+				}
+			}
+			if(format[r]==9) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][23];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][24];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][25];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=260 && my2<=280)
+					{
+						slider_i=sliders[r][26];
+					}
+				}
+			}
+			if(format[r]==10) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][27];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][28];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][29];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=260 && my2<=280)
+					{
+						slider_i=sliders[r][30];
+					}
+				}
+			}
+			if(format[r]==11) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][31];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][32];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][33];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=260 && my2<=280)
+					{
+						slider_i=sliders[r][34];
+					}
+				}
+			}
+			if(format[r]==12) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][35];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][36];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][37];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=260 && my2<=280)
+					{
+						slider_i=sliders[r][38];
+					}
+				}
+			}
+			if(format[r]==13) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][39];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][40];
+					}
+				}
+			}
+			if(format[r]==14) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][41];
+					}
+				}
+			}
+			if(format[r]==15) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][42];
+					}
+				}
+			}
+			if(format[r]==16) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][43];
+					}
+				}
+			}
+			if(format[r]==17) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][44];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][35];
+					}
+				}
+			}
+		
 		
 
 
@@ -1642,6 +2576,13 @@ int main() {
 	//place your own initialization codes here.
 
       //scanf("%d%d",m,c);
+	for(int y=0;y<10;y++)
+	{
+		for(int y1=0;y1<50;y1++)
+		{
+			sliders[y][y1]=1365;
+		}
+	}
 	if(r==0) clear_variables;
 	iInitialize(1500, 800, "project_trial_1");
 	return 0;
