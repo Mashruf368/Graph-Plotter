@@ -15,10 +15,11 @@ char v[10][50][10];
 //float var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11,var12,var13,var14,var15,var16,var17,var18,var19,var20,var21,var22;
 //int i1,i2;
 float var[10][50];
-
+double green[10],red[10],blue[10];
 double slider=1365,slider_i,slider2=1365;
 double sliders[10][50];
-
+char equations[10][30];
+double r_temp=0;
 // for(int i1=0;i1<10;i1++)
 // {
 // 	for(int i2=0;i2<50;i2++)
@@ -811,9 +812,9 @@ void iDraw() {
 				if(j%25==0)
 				{
 					iSetColor(0,0,0);
-					iLine(x_axis+x_diff*j+6,-5000,x_axis+x_diff*j+6,5000);
+					iLine(x_axis+x_diff*j,-5000,x_axis+x_diff*j,5000);
 					iLine(x_axis-x_diff*j,-5000,x_axis-x_diff*j,5000);
-					iLine(-5000,y_axis+y_diff*j+6,5000,y_axis+y_diff*j+6);
+					iLine(-5000,y_axis+y_diff*j,5000,y_axis+y_diff*j);
 					iLine(-5000,y_axis-y_diff*j,5000,y_axis-y_diff*j);
 				}
 			}
@@ -823,18 +824,18 @@ void iDraw() {
 			else if(j%5){
 				if(x_diff>=45){
 				iSetColor(0,0,0);
-				iLine(x_axis+x_diff*j+6,-5000,x_axis+x_diff*j+6,5000);
+				iLine(x_axis+x_diff*j,-5000,x_axis+x_diff*j,5000);
 				iLine(x_axis-x_diff*j,-5000,x_axis-x_diff*j,5000);
-				iLine(-5000,y_axis+y_diff*j+6,5000,y_axis+y_diff*j+6);
+				iLine(-5000,y_axis+y_diff*j,5000,y_axis+y_diff*j);
 				iLine(-5000,y_axis-y_diff*j,5000,y_axis-y_diff*j);
 				}
 			}
 			else {
 				iSetColor(60,0,120);
-				iFilledRectangle(x_axis+x_diff*j+6,-5000,3,10000);
+				iFilledRectangle(x_axis+x_diff*j,-5000,3,10000);
 				iFilledRectangle(x_axis-x_diff*j,-5000,3,10000);
 				iFilledRectangle(-5000,y_axis-y_diff*j,10000,3);
-				iFilledRectangle(-5000,y_axis+y_diff*j+6,10000,3);
+				iFilledRectangle(-5000,y_axis+y_diff*j,10000,3);
 			}
 			
 			
@@ -879,16 +880,7 @@ void iDraw() {
         take_inputs();
     }
 
-	//show the function;;;;;;;;;;
-
-
-	iSetColor(150,164,260);
-	iFilledRectangle(0,400,250,800);
-	iSetColor(255,255,255);
-	iFilledRectangle(5,730,190,60);
-	iFilledRectangle(5,660,190,60);
-	iSetColor(0,0,0);
-	iText(10,740,"YOUR FUNCTION:",GLUT_BITMAP_HELVETICA_18);
+	
 	
 	
 
@@ -916,16 +908,17 @@ void iDraw() {
 	{
 		if(format[h]==1)
 		{
-			char buffer[30];
-			sprintf(buffer,"y=%.1fx+%.1f",var[h][1],var[h][2]);
+			
+			sprintf(equations[r],"y=%.1fx+%.1f",var[h][1],var[h][2]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-10000,Y;X<=10000;X+=.5)
 			{
 				Y=(var[h][1]*(X-x_axis))+var[h][2]*(y_diff)+y_axis;
-				iSetColor(0,0,0);
-				if(X<=1200)
+				//iSetColor(red[r],green[r],blue[r]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
+					iSetColor(red[h],green[h],blue[h]);
 					iFilledCircle(X,Y,2,100);
 				}
 			}
@@ -933,15 +926,15 @@ void iDraw() {
 		}
 		if(format[h]==2)
 		{
-			char buffer[30];
-			sprintf(buffer,"y=%.1fx+%.1fy+%.1f",var[h][3],var[h][4],var[h][5]);
+			
+			sprintf(equations[r],"y=%.1fx+%.1fy+%.1f",var[h][3],var[h][4],var[h][5]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-10000,Y;X<=10000;X+=.5)
 			{
 				Y=-(var[h][3]*(X-x_axis)+var[h][5]*y_diff)/var[h][4]+y_axis;
-				iSetColor(0,0,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -950,15 +943,15 @@ void iDraw() {
 		}
 		if(format[h]==3)
 		{
-			char buffer[30];
-			sprintf(buffer,"y=x/%.1f+y/%.1f=1",var[h][6],var[h][7]);
+			
+			sprintf(equations[r],"y=x/%.1f+y/%.1f=1",var[h][6],var[h][7]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-10000,Y;X<=10000;X+=0.5)
 			{
 				Y=(y_diff-(X-x_axis)/var[h][6])*var[h][7]+y_axis;
-				iSetColor(0,0,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -967,15 +960,15 @@ void iDraw() {
 		}
 		if(format[h]==4)
 		{
-			char buffer[30];
-			sprintf(buffer,"x=%.1f",var[h][8]);
+			
+			sprintf(equations[r],"x=%.1f",var[h][8]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X,Y=-10000;Y<=10000;Y+=0.5)
 			{
 				X=x_axis+var[h][8]*x_diff;
-				iSetColor(0,0,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -984,14 +977,14 @@ void iDraw() {
 		}
 		if(format[h]==5)
 		{
-			char buffer[30];
-			sprintf(buffer,"y=%.1fx^2 + %.1fx + %.1f",var[h][9],var[h][10],var[h][11]);
+			
+			sprintf(equations[r],"y=%.1fx^2 + %.1fx + %.1f",var[h][9],var[h][10],var[h][11]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-1000,Y;X<=1000;X+=0.01)
             {
                 Y=var[h][9]*(pow((X-x_axis),2))/x_diff+var[h][10]*(X-x_axis)+var[h][11]*y_diff+y_axis;
-                iSetColor(0,255,0);
+                iSetColor(red[h],green[h],blue[h]);
 				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
@@ -1001,15 +994,15 @@ void iDraw() {
 		}
 		if(format[h]==6)
 		{
-			char buffer[30];
-			sprintf(buffer,"x=%.1fy^2 + %.1fy + %.1f",var[h][12],var[h][13],var[h][14]);
+			
+			sprintf(equations[r],"x=%.1fy^2 + %.1fy + %.1f",var[h][12],var[h][13],var[h][14]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double Y=-1000,X;Y<=1000;Y+=0.01)
             {
                 X=var[h][12]*(pow((Y-y_axis),2))/y_diff+var[h][13]*(Y-y_axis)+var[h][14]*y_diff+x_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
+                iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1026,23 +1019,23 @@ void iDraw() {
 		// }
 		if(format[h]==7)
 		{
-			char buffer[30];
+			
 			if(var[h][17]==0 && var[h][18]==0)
-			sprintf(buffer,"y=%.1fsin(%.1fx)",var[h][15],var[h][16],var[h][17],var[h][18]);
+			sprintf(equations[r],"y=%.1fsin(%.1fx)",var[h][15],var[h][16],var[h][17],var[h][18]);
 			else if(var[h][18]==0) 
-			sprintf(buffer,"y=%.1fsin(%.1fx+%.1f)",var[h][15],var[h][16],var[h][17]);
+			sprintf(equations[r],"y=%.1fsin(%.1fx+%.1f)",var[h][15],var[h][16],var[h][17]);
 			else if(var[h][17]==0)
-			sprintf(buffer,"y=%.1fsin(%.1fx)+%.1f",var[h][15],var[h][16],var[h][18]);
+			sprintf(equations[r],"y=%.1fsin(%.1fx)+%.1f",var[h][15],var[h][16],var[h][18]);
 
 			else 
-			{sprintf(buffer,"y=%.1fsin(%.1fx+%.1f)+%.1f",var[h][15],var[h][16],var[h][17],var[h][18]);}
+			{sprintf(equations[r],"y=%.1fsin(%.1fx+%.1f)+%.1f",var[h][15],var[h][16],var[h][17],var[h][18]);}
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
                 Y=(var[h][15]*sin((var[h][16]*(X-x_axis)/(x_diff)+var[h][17]*y_diff))+var[h][18])*y_diff+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
+                iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1051,23 +1044,23 @@ void iDraw() {
 		}
 		if(format[h]==8)
 		{
-			char buffer[30];
+			
 			if(var[h][21]==0 && var[h][22]==0)
-			sprintf(buffer,"y=%.1fcos(%.1fx)",var[h][19],var[h][20],var[h][21],var[h][22]);
+			sprintf(equations[r],"y=%.1fcos(%.1fx)",var[h][19],var[h][20],var[h][21],var[h][22]);
 			else if(var[h][22]==0) 
-			sprintf(buffer,"y=%.1fcos(%.1fx+%.1f)",var[h][19],var[h][20],var[h][21]);
+			sprintf(equations[r],"y=%.1fcos(%.1fx+%.1f)",var[h][19],var[h][20],var[h][21]);
 			else if(var[h][21]==0)
-			sprintf(buffer,"y=%.1fcos(%.1fx)+%.1f",var[h][19],var[h][20],var[h][22]);
+			sprintf(equations[r],"y=%.1fcos(%.1fx)+%.1f",var[h][19],var[h][20],var[h][22]);
 
 			else 
-			{sprintf(buffer,"y=%.1fcos(%.1fx+%.1f)+%.1f",var[h][19],var[h][20],var[h][21],var[h][22]);}
+			{sprintf(equations[r],"y=%.1fcos(%.1fx+%.1f)+%.1f",var[h][19],var[h][20],var[h][21],var[h][22]);}
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
                 Y=(var[h][19]*cos((var[h][20]*(X-x_axis)/(x_diff)+var[h][21]*y_diff))+var[h][22])*y_diff+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
+                iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1076,24 +1069,24 @@ void iDraw() {
 		}
 		if(format[h]==9)
 		{
-			char buffer[30];
+			
 			if(var[h][25]==0 && var[h][26]==0)
-			sprintf(buffer,"y=%.1ftan(%.1fx)",var[h][23],var[h][24],var[h][25],var[h][26]);
+			sprintf(equations[r],"y=%.1ftan(%.1fx)",var[h][23],var[h][24],var[h][25],var[h][26]);
 			else if(var[h][26]==0) 
-			sprintf(buffer,"y=%.1ftan(%.1fx+%.1f)",var[h][23],var[h][24],var[h][25]);
+			sprintf(equations[r],"y=%.1ftan(%.1fx+%.1f)",var[h][23],var[h][24],var[h][25]);
 			else if(var[h][25]==0)
-			sprintf(buffer,"y=%.1ftan(%.1fx)+%.1f",var[h][23],var[h][24],var[h][26]);
+			sprintf(equations[r],"y=%.1ftan(%.1fx)+%.1f",var[h][23],var[h][24],var[h][26]);
 
 			else 
-			{sprintf(buffer,"y=%.1ftan(%.1fx+%.1f)+%.1f",var[h][23],var[h][24],var[h][25],var[h][26]);}
+			{sprintf(equations[r],"y=%.1ftan(%.1fx+%.1f)+%.1f",var[h][23],var[h][24],var[h][25],var[h][26]);}
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.01)
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
 				Y=(var[h][23]*tan((var[h][24]*(X-x_axis)/(x_diff)+var[h][25]*y_diff))+var[h][26])*y_diff+y_axis;
-                iSetColor(0,255,0);
+                iSetColor(red[h],green[h],blue[h]);
 				if(X<=1200 && X>=0 && Y>=0 && Y<=900)
 				{
 					iFilledCircle(X,Y,2,100);
@@ -1104,25 +1097,25 @@ void iDraw() {
 		}
 		if(format[h]==10)
 		{
-			char buffer[30];
+			
 			if(var[h][29]==0 && var[h][30]==0)
-			sprintf(buffer,"y=%.1fcot(%.1fx)",var[h][27],var[h][28],var[h][29],var[h][30]);
+			sprintf(equations[r],"y=%.1fcot(%.1fx)",var[h][27],var[h][28],var[h][29],var[h][30]);
 			else if(var[h][30]==0) 
-			sprintf(buffer,"y=%.1fcot(%.1fx+%.1f)",var[h][27],var[h][28],var[h][29]);
+			sprintf(equations[r],"y=%.1fcot(%.1fx+%.1f)",var[h][27],var[h][28],var[h][29]);
 			else if(var[h][29]==0)
-			sprintf(buffer,"y=%.1fcot(%.1fx)+%.1f",var[h][27],var[h][28],var[h][30]);
+			sprintf(equations[r],"y=%.1fcot(%.1fx)+%.1f",var[h][27],var[h][28],var[h][30]);
 
 			else 
-			{sprintf(buffer,"y=%.1fcot(%.1fx+%.1f)+%.1f",var[h][27],var[h][28],var[h][29],var[h][30]);}
+			{sprintf(equations[r],"y=%.1fcot(%.1fx+%.1f)+%.1f",var[h][27],var[h][28],var[h][29],var[h][30]);}
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
 				Y=(var[h][27]* (1/tan((var[h][28]*(X-x_axis)/(x_diff)+var[h][29]*y_diff)))+var[h][30])*y_diff+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
+                iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1132,25 +1125,25 @@ void iDraw() {
 		}
 		if(format[h]==11)
 		{
-			char buffer[30];
+			
 			if(var[h][33]==0 && var[h][34]==0)
-			sprintf(buffer,"y=%.1fcosec(%.1fx)",var[h][31],var[h][32],var[h][33],var[h][34]);
+			sprintf(equations[r],"y=%.1fcosec(%.1fx)",var[h][31],var[h][32],var[h][33],var[h][34]);
 			else if(var[h][34]==0) 
-			sprintf(buffer,"y=%.1fcosec(%.1fx+%.1f)",var[h][31],var[h][32],var[h][33]);
+			sprintf(equations[r],"y=%.1fcosec(%.1fx+%.1f)",var[h][31],var[h][32],var[h][33]);
 			else if(var[h][33]==0)
-			sprintf(buffer,"y=%.1fcosec(%.1fx)+%.1f",var[h][31],var[h][32],var[h][34]);
+			sprintf(equations[r],"y=%.1fcosec(%.1fx)+%.1f",var[h][31],var[h][32],var[h][34]);
 
 			else 
-			{sprintf(buffer,"y=%.1fcosec(%.1fx+%.1f)+%.1f",var[h][31],var[h][32],var[h][33],var[h][34]);}
+			{sprintf(equations[r],"y=%.1fcosec(%.1fx+%.1f)+%.1f",var[h][31],var[h][32],var[h][33],var[h][34]);}
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
 				Y=(var[h][31]* (1/sin((var[h][32]*(X-x_axis)/(x_diff)+var[h][33]*y_diff)))+var[h][34])*y_diff+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
+                iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1161,25 +1154,25 @@ void iDraw() {
 		}
 		if(format[h]==12)
 		{
-			char buffer[30];
+			 
 			if(var[h][37]==0 && var[h][38]==0)
-			sprintf(buffer,"y=%.1fsec(%.1fx)",var[h][35],var[h][36],var[h][37],var[h][38]);
+			sprintf(equations[r],"y=%.1fsec(%.1fx)",var[h][35],var[h][36],var[h][37],var[h][38]);
 			else if(var[h][38]==0) 
-			sprintf(buffer,"y=%.1fsec(%.1fx+%.1f)",var[h][35],var[h][36],var[h][37]);
+			sprintf(equations[r],"y=%.1fsec(%.1fx+%.1f)",var[h][35],var[h][36],var[h][37]);
 			else if(var[h][37]==0)
-			sprintf(buffer,"y=%.1fsec(%.1fx)+%.1f",var[h][35],var[h][36],var[h][38]);
+			sprintf(equations[r],"y=%.1fsec(%.1fx)+%.1f",var[h][35],var[h][36],var[h][38]);
 
 			else 
-			{sprintf(buffer,"y=%.1fsec(%.1fx+%.1f)+%.1f",var[h][35],var[h][36],var[h][37],var[h][38]);}
+			{sprintf(equations[r],"y=%.1fsec(%.1fx+%.1f)+%.1f",var[h][35],var[h][36],var[h][37],var[h][38]);}
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
                 //if(((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff)/(PI))!=0 && (int)((var[20]*(X-x_axis)/(x_diff)+var[21]*y_diff))%90!=0)
 				
 				Y=(var[h][35]* (1/cos((var[h][36]*(X-x_axis)/(x_diff)+var[h][37]*y_diff)))+var[h][38])*y_diff+y_axis;
-                iSetColor(0,255,0);
-				if(X<=1200)
+                iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1190,16 +1183,16 @@ void iDraw() {
 		}
 		if(format[h]==13)
 		{
-			char buffer[30];
+			 
 			
-			sprintf(buffer,"y=%.1lf^(%.1lfx)",var[h][39],var[h][40]);
+			sprintf(equations[r],"y=%.1lf^(%.1lfx)",var[h][39],var[h][40]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
                 Y=pow(var[h][39],var[h][40]*(X-x_axis)/x_diff)*y_diff+y_axis+5;
-				iSetColor(0,255,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1207,16 +1200,16 @@ void iDraw() {
 		}
 		if(format[h]==14)
 		{
-			char buffer[30];
+			 
 			
-			sprintf(buffer,"y=e^(%.1lfx)",var[h][41]);
+			sprintf(equations[r],"y=e^(%.1lfx)",var[h][41]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-20,Y;X<=1500;X+=0.05)
             {
                 Y=exp(var[h][41]*(X-x_axis)/x_diff)*y_diff+y_axis+5;
-				iSetColor(0,255,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1224,16 +1217,16 @@ void iDraw() {
 		}
 		if(format[h]==15)
 		{
-			char buffer[30];
 			
-			sprintf(buffer,"y=log(%.1lfx)",var[h][42]);
+			 
+			sprintf(equations[r],"y=log(%.1lfx)",var[h][42]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double Y=-1000,X;Y<=1500;Y+=0.05)
             {
 				X=(pow(10,(Y-y_axis)/y_diff)*x_diff)/var[h][42]+x_axis;
-				iSetColor(0,255,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1241,16 +1234,16 @@ void iDraw() {
 		}
 		if(format[h]==16)
 		{
-			char buffer[30];
+			 
 			
-			sprintf(buffer,"y=ln(%.1lfx)",var[h][43]);
+			sprintf(equations[r],"y=ln(%.1lfx)",var[h][43]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double Y=-1000,X;Y<=1500;Y+=0.05)
             {
 				X=(pow(e,(Y-y_axis)/y_diff)*x_diff)/var[h][43]+x_axis;
-				iSetColor(0,255,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1258,16 +1251,16 @@ void iDraw() {
 		}
 		if(format[h]==17)
 		{
-			char buffer[30];
+			 
 			
-			sprintf(buffer,"y=log%.1lf(%.1lfx)",var[h][44],var[h][45]);
+			sprintf(equations[r],"y=log%.1lf(%.1lfx)",var[h][44],var[h][45]);
 			iSetColor(0,0,0);
-			iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double Y=-1000,X;Y<=1500;Y+=0.05)
             {
                 X=(pow(var[h][44],(Y-y_axis)/y_diff)*x_diff)/var[h][45]+x_axis;
-				iSetColor(0,255,0);
-				if(X<=1200)
+				iSetColor(red[h],green[h],blue[h]);
+				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
 				}
@@ -1277,7 +1270,88 @@ void iDraw() {
 	}
 	}
 
+
+
+	//show the function;;;;;;;;;;
+
+
+	iSetColor(150,164,260);
+	iFilledRectangle(0,710,300,800);
+	iSetColor(160,200,210);
+	iFilledRectangle(5,730,290,60);
+	
+	//iFilledRectangle(5,600,190,50);
+	iSetColor(0,0,0);
+	iText(10,740,"YOUR FUNCTION:",GLUT_BITMAP_HELVETICA_18);
+	//iText(10,670,equations[r],GLUT_BITMAP_HELVETICA_18);
+
+
+	/////prints the function works perfect
+	for(int z=0;z<=r;z++)
+	{
+		if(draw[z]) 
+		{
+			iSetColor(150,164,260);
+			iFilledRectangle(0,650-60*z,300,60);
+			iSetColor(160,200,210);
+			iFilledRectangle(5,660-60*z,290,50);
+			iSetColor(255,0,0);
+			iFilledRectangle(220,670-z*60,15,15);
+			iSetColor(0,255,0);
+			iFilledRectangle(240,670-z*60,15,15);
+			iSetColor(0,0,255);
+			iFilledRectangle(260,670-z*60,15,15);
+			iSetColor(0,0,0);
+			iText(10,670-z*60,equations[z],GLUT_BITMAP_HELVETICA_18);
+		}
+	}
+
+	///ends perfect code for printing the functions
+
+	// if(draw[0])
+	// {
+	// 	iSetColor(255,255,255);
+	// 	iFilledRectangle(5,660,290,50);
+	// 	iSetColor(255,0,0);
+	// 	iFilledRectangle(220,670,15,15);
+	// 	iSetColor(0,255,0);
+	// 	iFilledRectangle(240,670,15,15);
+	// 	iSetColor(0,0,255);
+	// 	iFilledRectangle(260,670,15,15);
+	// 	iSetColor(0,0,0);
+	// 	iText(10,670,equations[0],GLUT_BITMAP_HELVETICA_18);
+	// }
+	// if(draw[1])
+	// {
+	// 	iSetColor(255,255,255);
+	// 	iFilledRectangle(5,600,290,50);
+	// 	iSetColor(255,0,0);
+	// 	iFilledRectangle(220,610,15,15);
+	// 	iSetColor(0,255,0);
+	// 	iFilledRectangle(240,610,15,15);
+	// 	iSetColor(0,0,255);
+	// 	iFilledRectangle(260,610,15,15);
+	// 	iSetColor(0,0,0);
+	// 	iText(10,610,equations[1],GLUT_BITMAP_HELVETICA_18);
+	// }
+	// if(draw[2])
+	// {
+	// 	iSetColor(255,255,255);
+	// 	iFilledRectangle(5,600,290,50);
+	// 	iSetColor(255,0,0);
+	// 	iFilledRectangle(220,610,15,15);
+	// 	iSetColor(0,255,0);
+	// 	iFilledRectangle(240,610,15,15);
+	// 	iSetColor(0,0,255);
+	// 	iFilledRectangle(260,610,15,15);
+	// 	iSetColor(0,0,0);
+	// 	iText(10,610,equations[2],GLUT_BITMAP_HELVETICA_18);
+	// }
+
+
 }
+
+
 
 
 
@@ -2468,21 +2542,242 @@ void iMouse(int button, int state, int mx2, int my2) {
 					draw[r]=true;
 				}
 			}
-		}
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+		} 
     
     }
 
+	
+		if(draw[0])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=670 && my2<=685)
+			{
+				red[0]=255,blue[0]=0,green[0]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=670 && my2<=685)
+			{
+				green[0]=255,blue[0]=0,red[0]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=670 && my2<=685)
+			{
+				blue[0]=255,red[0]=0,green[0]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[1])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=610 && my2<=625)
+			{
+				red[1]=255,blue[1]=0,green[1]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=610 && my2<=625)
+			{
+				green[1]=255,blue[1]=0,red[1]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=610 && my2<=625)
+			{
+				blue[1]=255,red[1]=0,green[1]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[2])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=550 && my2<=565)
+			{
+				red[2]=255,blue[2]=0,green[2]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=550 && my2<=565)
+			{
+				green[2]=255,blue[2]=0,red[2]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=550 && my2<=565)
+			{
+				blue[2]=255,red[2]=0,green[2]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[3])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=490 && my2<=505)
+			{
+				red[3]=255,blue[3]=0,green[3]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=490 && my2<=505)
+			{
+				green[3]=255,blue[3]=0,red[3]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=490 && my2<=505)
+			{
+				blue[3]=255,red[3]=0,green[3]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[4])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=430 && my2<=445)
+			{
+				red[4]=255,blue[4]=0,green[4]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=430 && my2<=445)
+			{
+				green[4]=255,blue[4]=0,red[4]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=430 && my2<=445)
+			{
+				blue[4]=255,red[4]=0,green[4]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[5])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=370 && my2<=385)
+			{
+				red[5]=255,blue[5]=0,green[5]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=370 && my2<=385)
+			{
+				green[5]=255,blue[5]=0,red[5]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=370 && my2<=385)
+			{
+				blue[5]=255,red[5]=0,green[5]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[6])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=310 && my2<=325)
+			{
+				red[6]=255,blue[6]=0,green[6]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=310 && my2<=325)
+			{
+				green[6]=255,blue[6]=0,red[6]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=310 && my2<=325)
+			{
+				blue[6]=255,red[6]=0,green[6]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[7])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=250 && my2<=265)
+			{
+				red[7]=255,blue[7]=0,green[7]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=250 && my2<=265)
+			{
+				green[7]=255,blue[7]=0,red[7]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=250 && my2<=265)
+			{
+				blue[7]=255,red[7]=0,green[7]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[8])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=190 && my2<=205)
+			{
+				red[8]=255,blue[8]=0,green[8]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=190 && my2<=205)
+			{
+				green[8]=255,blue[8]=0,red[8]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=190 && my2<=205)
+			{
+				blue[8]=255,red[8]=0,green[8]=0;
+				//else blue[t]=0;
+			}
+		}
+		if(draw[9])
+		{
+			int temp1=670-30;
+			int temp2=670-30+15;
+			if(mx2>=220 && mx2<=235 && my2>=130 && my2<=145)
+			{
+				red[9]=255,blue[9]=0,green[9]=0;
+				//else red[t]=0;
+			}
+			if(mx2>=240 && mx2<=255 && my2>=130 && my2<=145)
+			{
+				green[9]=255,blue[9]=0,red[9]=0;
+				//else green[t]=0;
+			}
+			if(mx2>=260 && mx2<=275 && my2>=130 && my2<=145)
+			{
+				blue[9]=255,red[9]=0,green[9]=0;
+				//else blue[t]=0;
+			}
+		}
+		
+		// for(int z=0;z<r;z++)
+		// {
+		// 	if(draw[z])
+		// 	{
+		// 		int temp1=670-30;
+		// 		int temp2=670-30+15;
+		// 		if(mx2>=220 && mx2<=235 && my2>=670-z*60 && my2<=685-z*60)
+		// 		{
+		// 			if(red[z]==0) red[z]=255,green[z]=0,blue[z]=0;
+		// 			//else red[t]=0;
+		// 		}
+		// 		if(mx2>=240 && mx2<=255 && my2>=670-z*60 && my2<=685-z*60)
+		// 		{
+		// 			if(green[z]==0) green[z]=255,blue[z]=0,red[z]=0;
+		// 			//else green[t]=0;
+		// 		}
+		// 		if(mx2>=260 && mx2<=275 && my2>=670-z*60 && my2<=685-z*60)
+		// 		{
+		// 			if(blue[z]==0) blue[z]=255,red[z]=0,green[z]=0;
+		// 			//else blue[t]=0;
+		// 		}
+		// 	}
+		// }
+	
+
+
+
 	//back button function
+
+	//double r_temp=r;
 	if(mx2>=1210 && mx2<=1260 && my2>=30 && my2<=60)
 	{
 		// if(draw1)
@@ -2490,7 +2785,12 @@ void iMouse(int button, int state, int mx2, int my2) {
 		// 	if(format!=0) format=0,draw1=true;
 		// 	else if(function!=0) function=0,draw1=true;
 		// }
-		r+=1;
+		r_temp+=0.5;
+		// r=r_temp;
+		//r+=0.5;
+		//r=r-1;
+		r=(int)r_temp;
+		printf("r=%d\n",r);
 	}
 	
 	
