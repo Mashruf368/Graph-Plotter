@@ -7,19 +7,21 @@ int index_2=0,window=0;
 bool type=false,draw[10]={false,false,false,false,false,false,false,false,false,false};
 // bool variable_8=false,variable_9=false,variable_10=false,variable_11=false,variable_12=false,variable_13=false,variable_14=false;
 // bool variable_1=false,variable_2=false,variable_3=false,variable_4=false,variable_5=false,variable_6=false,variable_7=falsevariable_15=false,variable_16=false,variable_17=false,variable_18=false,variable_19=false,variable_20=false,variable_21=false,variable_22=false;
-bool variable[10][50];
+bool variable[10][60];
 bool go_back=false;
 int function[10]={0,0,0,0,0,0,0,0,0,0},format[10]={0,0,0,0,0,0,0,0,0,0},function2=0;
 // char v1[10],v2[10],v3[10],v4[10],v5[10],v6[10],v7[10],v8[10],v9[10],v10[10],v11[10],v12[10],v13[10],v14[10],v15[10],v16[10],v17[10],v18[10],v19[10],v20[10],v21[10],v22[10];
-char v[10][50][10];
+char v[10][60][10];
 //float var1,var2,var3,var4,var5,var6,var7,var8,var9,var10,var11,var12,var13,var14,var15,var16,var17,var18,var19,var20,var21,var22;
 //int i1,i2;
-float var[10][50];
+float var[10][60];
 double green[10],red[10],blue[10];
 double slider=1365,slider_i,slider2=1365;
-double sliders[10][50];
+double sliders[10][60];
 char equations[10][30];
 double r_temp=0;
+bool credits=false;
+int x_cod,y_cod;
 // for(int i1=0;i1<10;i1++)
 // {
 // 	for(int i2=0;i2<50;i2++)
@@ -100,11 +102,16 @@ void draw_polynomial_menu()
     iFilledRectangle(1210,730,280,60);
     iFilledRectangle(1210,660,280,60);
     iFilledRectangle(1210,590,280,60);
+	iFilledRectangle(1210,520,280,60);
+    iFilledRectangle(1210,450,280,60);
 	iFilledRectangle(1210,30,50,30);
     iSetColor(0,0,0);
     iText(1220,740,"Select your Format:",GLUT_BITMAP_TIMES_ROMAN_24);
     iText(1220,670,"1.y=ax^2 + bx + c",GLUT_BITMAP_HELVETICA_18);
     iText(1220,600,"2.x=ay^2 + by + c",GLUT_BITMAP_HELVETICA_18);
+	iText(1220,530,"3.x^2 + y^2+ 2gx + 2fy + c=0",GLUT_BITMAP_HELVETICA_18);
+    iText(1220,460,"4.(x-p)^2/a^2 + (y-q)^2/b^2 =1",GLUT_BITMAP_HELVETICA_18);
+
 	iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
 
 }
@@ -376,6 +383,82 @@ void take_inputs()
 
         
     }
+	if(format[r]==18)
+    {
+        iSetColor(164,260,164);
+        iFilledRectangle(1210,730,280,60);
+		iFilledRectangle(1210,590,280,60);
+		iFilledRectangle(1210,450,280,60);
+		iFilledRectangle(1210,310,280,60);
+		iFilledRectangle(1310,30,50,50);
+		iFilledRectangle(1210,30,50,30);
+		iFilledRectangle(1210,110,190,50); ///////////add another function box
+        iSetColor(0,0,0);
+        iText(1220,740,"Input the values of g,f,c:",GLUT_BITMAP_TIMES_ROMAN_24);
+        iText(1220,670,"g:",GLUT_BITMAP_HELVETICA_18);
+        iText(1220,530,"f:",GLUT_BITMAP_HELVETICA_18);
+		iText(1220,390,"c:",GLUT_BITMAP_HELVETICA_18);
+		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
+		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
+		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
+        iText(1220,600,v[r][46],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][47],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][48],GLUT_BITMAP_8_BY_13);
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		//iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][46],680,10,20);
+		iFilledRectangle(sliders[r][47],540,10,20);
+		iFilledRectangle(sliders[r][48],400,10,20);
+		//iFilledRectangle(1365,260,10,20);
+
+        
+    }
+	if(format[r]==19)
+	{
+		iSetColor(164,260,164);
+        iFilledRectangle(1210,730,280,60);
+		iFilledRectangle(1210,590,280,60);
+		iFilledRectangle(1210,450,280,60);
+		iFilledRectangle(1210,310,280,60);
+		iFilledRectangle(1210,190,280,60);
+		iFilledRectangle(1310,30,50,50);
+		iFilledRectangle(1210,30,50,30);
+		iFilledRectangle(1210,110,190,50); ///////////add another function box
+		iSetColor(0,0,0);
+		iText(1220,740,"Input the values of p,q,a,b:",GLUT_BITMAP_TIMES_ROMAN_24);
+        iText(1220,680,"p:",GLUT_BITMAP_HELVETICA_18);
+        iText(1220,540,"q:",GLUT_BITMAP_HELVETICA_18);
+		iText(1220,400,"a:",GLUT_BITMAP_HELVETICA_18);
+		iText(1220,270,"b:",GLUT_BITMAP_HELVETICA_18);
+		iText(1320,50,"Draw",GLUT_BITMAP_8_BY_13);
+		iText(1215,40,"BACK",GLUT_BITMAP_9_BY_15);
+		iText(1215,125,"Add another Function:",GLUT_BITMAP_HELVETICA_18);
+		iText(1220,600,v[r][49],GLUT_BITMAP_8_BY_13);
+        iText(1220,460,v[r][50],GLUT_BITMAP_8_BY_13);
+		iText(1220,320,v[r][51],GLUT_BITMAP_8_BY_13);
+		iText(1220,200,v[r][52],GLUT_BITMAP_8_BY_13);
+
+
+		//setting slider
+
+		iSetColor(0,0,0);
+		iLine(1270,690,1470,690);
+		iLine(1270,550,1470,550);
+		iLine(1270,410,1470,410);
+		iLine(1270,270,1470,270);
+		iSetColor(50,200,50);
+		iFilledRectangle(sliders[r][49],680,10,20);
+		iFilledRectangle(sliders[r][50],540,10,20);
+		iFilledRectangle(sliders[r][51],400,10,20);
+		iFilledRectangle(sliders[r][52],260,10,20);
+
+		
+	}
 	if(format[r]==7)
 	{
 		iSetColor(164,260,164);
@@ -842,6 +925,11 @@ void iDraw() {
 			
 		}
 	}
+
+	
+
+
+
 	//iSetColor(0,0,0);
 	
 	iSetColor(144,238,144);
@@ -1009,14 +1097,52 @@ void iDraw() {
             }
 			
 		}
-		// if(format==6)
-		// {
-		// 	char buffer[30];
-		// 	sprintf(buffer,"x=%.1fy^2 + %.1fy + %.1f",var[12],var[13],var[14]);
-		// 	iSetColor(0,0,0);
-		// 	iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+		if(format[h]==18)
+		{
 			
-		// }
+			sprintf(equations[r],"x^2+y^2+%.1fx+%.1fy+%.1f=0",2*var[h][46],2*var[h][47],var[h][48]);
+			iSetColor(0,0,0);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//for(double Y=-1000,X;Y<=1000;Y+=0.01)
+                double X,Y;
+                X=x_axis-var[h][46]*x_diff;
+				Y=y_axis-var[h][47]*y_diff;
+				double radius=sqrt(pow(var[h][46],2)+pow(var[h][47],2)-var[h][48]);
+                iSetColor(red[h],green[h],blue[h]);
+				// if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
+				// {
+				// 	iFilledCircle(X,Y,2,100);
+				// }
+				iCircle(X,Y,radius*x_diff,100);
+            
+			
+		}
+		if(format[h]==19)
+		{
+			
+			sprintf(equations[r],"(X^2)/%.1f + (Y^2)/%.1f=1",var[h][49],pow(var[h][51],2),var[h][50],pow(var[h][52],2));
+			iSetColor(0,0,0);
+			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
+			//for(double Y=-1000,X;Y<=1000;Y+=0.01)
+                double X,Y;
+                X=x_axis-var[h][49]*x_diff;
+				Y=y_axis-var[h][50]*y_diff;
+				double radius=sqrt(pow(var[h][46],2)+pow(var[h][47],2)-var[h][48]);
+                iSetColor(red[h],green[h],blue[h]);
+				// if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
+				// {
+				// 	iFilledCircle(X,Y,2,100);
+				// }
+				iEllipse(X,Y,var[h][51]*x_diff,var[h][52]*y_diff,100);
+            
+			
+		}
+		
+
+
+
+
+
 		if(format[h]==7)
 		{
 			
@@ -1282,7 +1408,7 @@ void iDraw() {
 	
 	//iFilledRectangle(5,600,190,50);
 	iSetColor(0,0,0);
-	iText(10,740,"YOUR FUNCTION:",GLUT_BITMAP_HELVETICA_18);
+	iText(10,740,"YOUR FUNCTIONS:",GLUT_BITMAP_HELVETICA_18);
 	//iText(10,670,equations[r],GLUT_BITMAP_HELVETICA_18);
 
 
@@ -1308,45 +1434,43 @@ void iDraw() {
 
 	///ends perfect code for printing the functions
 
-	// if(draw[0])
+	
+	// void cartesiaa(char line[10])
 	// {
-	// 	iSetColor(255,255,255);
-	// 	iFilledRectangle(5,660,290,50);
-	// 	iSetColor(255,0,0);
-	// 	iFilledRectangle(220,670,15,15);
-	// 	iSetColor(0,255,0);
-	// 	iFilledRectangle(240,670,15,15);
-	// 	iSetColor(0,0,255);
-	// 	iFilledRectangle(260,670,15,15);
 	// 	iSetColor(0,0,0);
-	// 	iText(10,670,equations[0],GLUT_BITMAP_HELVETICA_18);
+	// 	iText(10,10,line,GLUT_BITMAP_TIMES_ROMAN_24);
 	// }
-	// if(draw[1])
-	// {
-	// 	iSetColor(255,255,255);
-	// 	iFilledRectangle(5,600,290,50);
-	// 	iSetColor(255,0,0);
-	// 	iFilledRectangle(220,610,15,15);
-	// 	iSetColor(0,255,0);
-	// 	iFilledRectangle(240,610,15,15);
-	// 	iSetColor(0,0,255);
-	// 	iFilledRectangle(260,610,15,15);
-	// 	iSetColor(0,0,0);
-	// 	iText(10,610,equations[1],GLUT_BITMAP_HELVETICA_18);
-	// }
-	// if(draw[2])
-	// {
-	// 	iSetColor(255,255,255);
-	// 	iFilledRectangle(5,600,290,50);
-	// 	iSetColor(255,0,0);
-	// 	iFilledRectangle(220,610,15,15);
-	// 	iSetColor(0,255,0);
-	// 	iFilledRectangle(240,610,15,15);
-	// 	iSetColor(0,0,255);
-	// 	iFilledRectangle(260,610,15,15);
-	// 	iSetColor(0,0,0);
-	// 	iText(10,610,equations[2],GLUT_BITMAP_HELVETICA_18);
-	// }
+
+
+	iSetColor(160,200,210);
+	iFilledRectangle(10,10,100,40);
+	iSetColor(0,0,0);
+	iText(20,20,"CREDITS:",GLUT_BITMAP_HELVETICA_18);
+	///
+	/// printing the coordinates
+	iSetColor(160,200,210);
+	iFilledRectangle(120,10,100,40);
+	char coordinates[10];
+	iSetColor(0,0,0);
+	sprintf(coordinates,"%d,%d",(x_cod-x_axis)/x_diff,(y_cod-y_axis)/y_diff);
+	iText(130,20,coordinates,GLUT_BITMAP_HELVETICA_18);
+
+
+
+	if(credits)
+	{
+		iSetColor(0,0,0);
+		iFilledRectangle(0,0,1500,1200);
+		iShowBMP(120,40,"bg3.bmp");
+		iSetColor(128,128,128);
+		iFilledRectangle(1410,40,70,50);
+		iSetColor(0,0,0);
+		iText(1420,50,"BACK",GLUT_BITMAP_HELVETICA_18);
+	}
+
+	
+
+
 
 
 }
@@ -1810,6 +1934,70 @@ void iMouseMove(int mx1, int my1) {
 				}
 			}
 		}
+		if(format[r]==18) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][46]=mx1;
+					double diff=sliders[r][46]-slider_i;
+					var[r][46]+=diff/50;
+					slider_i=sliders[r][46];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][47]=mx1;
+					double diff=sliders[r][47]-slider_i;
+					var[r][47]+=diff/50;
+					slider_i=sliders[r][47];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][48]=mx1;
+					double diff=sliders[r][48]-slider_i;
+					var[r][48]+=diff/50;
+					slider_i=sliders[r][48];
+				}
+			}
+		}
+		if(format[r]==19) 
+		{
+			if(draw[r])
+			{
+				if(mx1>=1270 && mx1<=1470 && my1>=680 && my1<=700)
+				{
+					sliders[r][49]=mx1;
+					double diff=sliders[r][49]-slider_i;
+					var[r][49]+=diff/50;
+					slider_i=sliders[r][49];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=540 && my1<=560)
+				{
+					sliders[r][50]=mx1;
+					double diff=sliders[r][50]-slider_i;
+					var[r][50]+=diff/50;
+					slider_i=sliders[r][50];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=410 && my1<=430)
+				{
+					sliders[r][51]=mx1;
+					double diff=sliders[r][51]-slider_i;
+					var[r][51]+=diff/50;
+					slider_i=sliders[r][51];
+				}
+				if(mx1>=1270 && mx1<=1470 && my1>=260 && my1<=280)
+				{
+					sliders[r][52]=mx1;
+					double diff=sliders[r][52]-slider_i;
+					var[r][52]+=diff/50;
+					slider_i=sliders[r][52];
+				}
+			}
+		}
+
+	
+
 	
 	
 }
@@ -2137,6 +2325,47 @@ void iMouse(int button, int state, int mx2, int my2) {
 					}
 				}
 			}
+			if(format[r]==18) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][46];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][47];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][48];
+					}
+				}
+			}
+			if(format[r]==19) 
+			{
+				if(draw[r])
+				{
+					if(mx2>=1270 && mx2<=1470 && my2>=680 && my2<=700)
+					{
+						slider_i=sliders[r][49];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=540 && my2<=560)
+					{
+						slider_i=sliders[r][50];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=400 && my2<=380)
+					{
+						slider_i=sliders[r][51];
+					}
+					if(mx2>=1270 && mx2<=1470 && my2>=260 && my2<=280)
+					{
+						slider_i=sliders[r][52];
+					}
+				}
+			}
+
 		
 		
 
@@ -2195,6 +2424,14 @@ void iMouse(int button, int state, int mx2, int my2) {
             else if(function[r]==2 && mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
             {
                 format[r]=6;
+            }
+			else if(function[r]==2 && mx2>=1210 && mx2<=1490 && my2>=520 && my2<=580)
+            {
+                format[r]=18;
+            }
+            else if(function[r]==2 && mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
+            {
+                format[r]=19;
             }
             else if(function[r]==3 && mx2>=1210 && mx2<=1490 && my2>=660 && my2<=720)
             {
@@ -2341,6 +2578,49 @@ void iMouse(int button, int state, int mx2, int my2) {
 					draw[r]=true;
 				}
 			}
+			if(format[r]==18)          //3 variables for circle
+			{
+				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
+				{
+					variable[r][46]=true;
+				}
+				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
+				{
+					variable[r][47]=true;
+				}
+				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
+				{
+					variable[r][48]=true;
+				}
+				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
+				{
+					draw[r]=true;
+				}
+			}
+			if(format[r]==19)
+			{
+				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
+				{
+					variable[r][49]=true;
+				}
+				if(mx2>=1210 && mx2<=1490 && my2>=450 && my2<=510)
+				{
+					variable[r][50]=true;
+				}
+				if(mx2>=1210 && mx2<=1490 && my2>=310 && my2<=370)
+				{
+					variable[r][51]=true;
+				}
+				if(mx2>=1210 && mx2<=1490 && my2>=170 && my2<=230)
+				{
+					variable[r][52]=true;
+				}
+				if(mx2>=1310 && mx2<=1360 && my2>=30 && my2<=80)
+				{
+					draw[r]=true;
+				}
+			}
+
 			if(format[r]==7)
 			{
 				if(mx2>=1210 && mx2<=1490 && my2>=590 && my2<=650)
@@ -2778,7 +3058,7 @@ void iMouse(int button, int state, int mx2, int my2) {
 	//back button function
 
 	//double r_temp=r;
-	if(mx2>=1210 && mx2<=1260 && my2>=30 && my2<=60)
+	if(mx2>=1210 && mx2<=1210+190 && my2>=110 && my2<=160)
 	{
 		// if(draw1)
 		// {
@@ -2792,6 +3072,32 @@ void iMouse(int button, int state, int mx2, int my2) {
 		r=(int)r_temp;
 		printf("r=%d\n",r);
 	}
+
+	if(mx2>=1210 && mx2<=1260 && my2>=30 && my2<=60)
+	{
+		function[r]=0;
+		format[r]=0;
+	}
+
+
+	if(mx2>=10 && mx2<=110 && my2>=10 && my2<=50)
+	{
+		credits=true;
+	}
+	if(credits)
+	{
+		if(mx2>=1410 && mx2<=1480 && my2>=40 && my2<=90)
+		credits=false;
+	}
+
+	if(mx2>=300 && mx2<=1200)
+	{
+		x_cod=mx2;
+		y_cod=my2;
+	}
+
+
+
 	
 	
 
@@ -2822,7 +3128,7 @@ void iKeyboard(unsigned char key) {
 		x_diff-=5;
 		y_diff-=5;
 	}
-	for(int p=1;p<50;p++)
+	for(int p=1;p<60;p++)
 	{
 		if(variable[r][p])
 		{
@@ -2878,7 +3184,7 @@ int main() {
       //scanf("%d%d",m,c);
 	for(int y=0;y<10;y++)
 	{
-		for(int y1=0;y1<50;y1++)
+		for(int y1=0;y1<60;y1++)
 		{
 			sliders[y][y1]=1365;
 		}
