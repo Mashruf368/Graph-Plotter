@@ -19,8 +19,8 @@ double green[10],red[10],blue[10];
 double slider=1365,slider_i,slider2=1365;
 double sliders[10][60];
 char equations[10][30];
-double r_temp=0;
-bool credits=false;
+double r_temp=0,solve_count=0,grid_count=0;
+bool credits=false,solutions=false,grid=false;
 int x_cod,y_cod;
 // for(int i1=0;i1<10;i1++)
 // {
@@ -872,6 +872,10 @@ void take_inputs()
 	
 }
 
+
+
+
+
 void iDraw() {
 	//place your drawing codes here
 	int i=1;
@@ -911,6 +915,25 @@ void iDraw() {
 				iLine(x_axis-x_diff*j,-5000,x_axis-x_diff*j,5000);
 				iLine(-5000,y_axis+y_diff*j,5000,y_axis+y_diff*j);
 				iLine(-5000,y_axis-y_diff*j,5000,y_axis-y_diff*j);
+
+
+				//creating coordinates
+				if(grid)
+				{
+				
+					char gridx_up[10],gridx_down[10];
+					sprintf(gridx_up,"%d",j);
+					iText(x_axis-8,y_axis+y_diff*j,gridx_up,GLUT_BITMAP_8_BY_13);
+					sprintf(gridx_down,"-%d",j);
+					iText(x_axis-15,y_axis-y_diff*j,gridx_down,GLUT_BITMAP_8_BY_13);
+
+					char gridy_up[10],gridy_down[10];
+					sprintf(gridy_up,"%d",j);
+					iText(x_axis+x_diff*j,y_axis+5,gridy_up,GLUT_BITMAP_8_BY_13);
+					sprintf(gridy_down,"-%d",j);
+					iText(x_axis-x_diff*j,y_axis+5,gridy_down,GLUT_BITMAP_8_BY_13);
+				}
+
 				}
 			}
 			else {
@@ -919,6 +942,25 @@ void iDraw() {
 				iFilledRectangle(x_axis-x_diff*j,-5000,3,10000);
 				iFilledRectangle(-5000,y_axis-y_diff*j,10000,3);
 				iFilledRectangle(-5000,y_axis+y_diff*j,10000,3);
+
+				//coordinates
+
+				if(grid)
+				{
+
+					iSetColor(0,0,0);
+					char griddx_up[10],griddx_down[10];
+					sprintf(griddx_up,"%d",j);
+					iText(x_axis-18,y_axis+y_diff*j+2,griddx_up,GLUT_BITMAP_9_BY_15);
+					sprintf(griddx_down,"-%d",j);
+					iText(x_axis-25,y_axis-y_diff*j+2,griddx_down,GLUT_BITMAP_9_BY_15);
+					char griddy_up[10],griddy_down[10];
+					sprintf(griddy_up,"%d",j);
+					iText(x_axis+x_diff*j,y_axis+10,griddy_up,GLUT_BITMAP_9_BY_15);
+					sprintf(griddy_down,"-%d",j);
+					iText(x_axis-x_diff*j,y_axis+10,griddy_down,GLUT_BITMAP_9_BY_15);
+				}
+
 			}
 			
 			
@@ -1009,13 +1051,23 @@ void iDraw() {
 					iSetColor(red[h],green[h],blue[h]);
 					iFilledCircle(X,Y,2,100);
 				}
+				if(solutions)
+				{
+					iSetColor(0,0,0);
+					double temp_x=(X-x_axis)/x_diff;
+					double temp_y=(Y-y_axis)/y_diff;
+					if(temp_x==(int)temp_x && temp_y==(int)temp_y)
+					{
+						iFilledCircle(X,Y,5,100);
+					}
+				}
 			}
 			
 		}
 		if(format[h]==2)
 		{
 			
-			sprintf(equations[r],"y=%.1fx+%.1fy+%.1f",var[h][3],var[h][4],var[h][5]);
+			sprintf(equations[r],"%.1fx+%.1fy+%.1f=0",var[h][3],var[h][4],var[h][5]);
 			iSetColor(0,0,0);
 			//iText(10,670,buffer,GLUT_BITMAP_HELVETICA_18);
 			for(double X=-10000,Y;X<=10000;X+=.5)
@@ -1025,7 +1077,19 @@ void iDraw() {
 				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
+					
 				}
+				if(solutions)
+				{
+					iSetColor(0,0,0);
+					double temp_x=(X-x_axis)/x_diff;
+					double temp_y=(Y-y_axis)/y_diff;
+					if(temp_x==(int)temp_x && temp_y==(int)temp_y)
+					{
+						iFilledCircle(X,Y,5,100);
+					}
+				}
+				
 			}
 			
 		}
@@ -1042,6 +1106,17 @@ void iDraw() {
 				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
+					
+				}
+				if(solutions)
+				{
+					iSetColor(0,0,0);
+					double temp_x=(X-x_axis)/x_diff;
+					double temp_y=(Y-y_axis)/y_diff;
+					if(temp_x==(int)temp_x && temp_y==(int)temp_y)
+					{
+						iFilledCircle(X,Y,5,100);
+					}
 				}
 			}
 			
@@ -1059,6 +1134,23 @@ void iDraw() {
 				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
+					iSetColor(0,0,0);
+					double temp_x=(X-x_axis)/x_diff;
+					double temp_y=(Y-y_axis)/y_diff;
+					if(temp_x==(int)temp_x && temp_y==(int)temp_y)
+					{
+						iFilledCircle(X,Y,5,100);
+					}
+					if(solutions)
+				{
+					iSetColor(0,0,0);
+					double temp_x=(X-x_axis)/x_diff;
+					double temp_y=(Y-y_axis)/y_diff;
+					if(temp_x==(int)temp_x && temp_y==(int)temp_y)
+					{
+						iFilledCircle(X,Y,5,100);
+					}
+				}
 				}
 			}
 			
@@ -1073,9 +1165,19 @@ void iDraw() {
             {
                 Y=var[h][9]*(pow((X-x_axis),2))/x_diff+var[h][10]*(X-x_axis)+var[h][11]*y_diff+y_axis;
                 iSetColor(red[h],green[h],blue[h]);
-				if(X<=1200 && X>=0 && Y>=0 && Y<=1000)
+				if(Y>=0 && Y<=1000)
 				{
 					iFilledCircle(X,Y,2,100);
+				}
+				if(solutions)
+				{
+					iSetColor(0,0,0);
+					double temp_x=(X-x_axis)/x_diff;
+					double temp_y=(Y-y_axis)/y_diff;
+					if(temp_x==(int)temp_x && temp_y==(int)temp_y)
+					{
+						iFilledCircle(X,Y,5,100);
+					}
 				}
             }
 			
@@ -1454,6 +1556,19 @@ void iDraw() {
 	iSetColor(0,0,0);
 	sprintf(coordinates,"%d,%d",(x_cod-x_axis)/x_diff,(y_cod-y_axis)/y_diff);
 	iText(130,20,coordinates,GLUT_BITMAP_HELVETICA_18);
+
+	iSetColor(160,200,210);
+	iFilledRectangle(10,60,150,40);
+	iSetColor(0,0,0);
+	iText(20,70,"SOLUTIONS",GLUT_BITMAP_HELVETICA_18);
+
+
+	iSetColor(160,200,210);
+	iFilledRectangle(10,110,150,40);
+	iSetColor(0,0,0);
+	iText(20,120,"Coordinates",GLUT_BITMAP_HELVETICA_18);
+
+
 
 
 
@@ -3094,6 +3209,35 @@ void iMouse(int button, int state, int mx2, int my2) {
 	{
 		x_cod=mx2;
 		y_cod=my2;
+	}
+
+	if(mx2>=10 && mx2<=160 && my2>=60 && my2<=100)
+	{
+		if(solutions!=true && solve_count==0)
+		{
+			solutions=true;
+		}
+		solve_count+=0.5; 
+		if(solutions && solve_count>1)
+		{
+			solutions=false;
+			solve_count=-0.5;
+			
+		}
+	}
+
+	if(mx2>=10 && mx2<=160 && my2>=110 && my2<=150)
+	{
+		if(grid!=true && grid_count==0)
+		{
+			grid=true;
+		}
+		grid_count+=0.5;
+		if(grid && grid_count>1)
+		{
+			grid=false;
+			grid_count=-0.5;
+		}
 	}
 
 
